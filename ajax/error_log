@@ -1,0 +1,20 @@
+[17-Sep-2020 16:35:51 UTC] PHP Warning:  mysqli::__construct(): (HY000/1045): Access denied for user 'qlfnhtok_bdpjhuanuco'@'localhost' (using password: YES) in /home/farojeqn/public_html/certificados/config/connection.php on line 3
+[17-Sep-2020 16:35:51 UTC] PHP Warning:  mysqli_real_escape_string(): Couldn't fetch mysqli in /home/farojeqn/public_html/certificados/config/connection.php on line 34
+[17-Sep-2020 16:35:51 UTC] PHP Warning:  mysqli_real_escape_string(): Couldn't fetch mysqli in /home/farojeqn/public_html/certificados/config/connection.php on line 34
+[17-Sep-2020 16:35:51 UTC] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home/farojeqn/public_html/certificados/config/connection.php on line 19
+[17-Sep-2020 16:35:51 UTC] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in /home/farojeqn/public_html/certificados/config/connection.php:20
+Stack trace:
+#0 /home/farojeqn/public_html/certificados/modelos/Certificado.php(71): ejecutarConsultaSimpleFila('SELECT id_alumn...')
+#1 /home/farojeqn/public_html/certificados/ajax/certificado.php(53): Certificado->verificar('', '')
+#2 {main}
+  thrown in /home/farojeqn/public_html/certificados/config/connection.php on line 20
+[17-Sep-2020 16:35:54 UTC] PHP Warning:  mysqli::__construct(): (HY000/1045): Access denied for user 'qlfnhtok_bdpjhuanuco'@'localhost' (using password: YES) in /home/farojeqn/public_html/certificados/config/connection.php on line 3
+[17-Sep-2020 16:35:54 UTC] PHP Warning:  mysqli_real_escape_string(): Couldn't fetch mysqli in /home/farojeqn/public_html/certificados/config/connection.php on line 34
+[17-Sep-2020 16:35:54 UTC] PHP Warning:  mysqli_real_escape_string(): Couldn't fetch mysqli in /home/farojeqn/public_html/certificados/config/connection.php on line 34
+[17-Sep-2020 16:35:54 UTC] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home/farojeqn/public_html/certificados/config/connection.php on line 19
+[17-Sep-2020 16:35:54 UTC] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in /home/farojeqn/public_html/certificados/config/connection.php:20
+Stack trace:
+#0 /home/farojeqn/public_html/certificados/modelos/Certificado.php(71): ejecutarConsultaSimpleFila('SELECT id_alumn...')
+#1 /home/farojeqn/public_html/certificados/ajax/certificado.php(53): Certificado->verificar('', '')
+#2 {main}
+  thrown in /home/farojeqn/public_html/certificados/config/connection.php on line 20
