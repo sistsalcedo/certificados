@@ -16,15 +16,15 @@
 /* line 22, C:/Users/SPN Graphics/Desktop/CL September/Edu mark/207 Education/HTML/scss/_extend.scss */
 .header-area .main-header-area.sticky {
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#a64eee+0,3c35ce+100 */
-  background: #a64eee;
+  background: #0098a3;
   /* Old browsers */
-  background: -moz-linear-gradient(left, #a64eee 0%, #3c35ce 100%);
+  background: -moz-linear-gradient(left, #0098a3 0%, #00496a 100%);
   /* FF3.6-15 */
-  background: -webkit-linear-gradient(left, #a64eee 0%, #3c35ce 100%);
+  background: -webkit-linear-gradient(left, #0098a3 0%, #00496a 100%);
   /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to right, #a64eee 0%, #3c35ce 100%);
+  background: linear-gradient(to right, #0098a3 0%, #00496a 100%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a64eee', endColorstr='#3c35ce',GradientType=1 );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0098a3', endColorstr='#00496a',GradientType=1 );
   /* IE6-9 */
 }
 
@@ -1228,7 +1228,7 @@ h3 {
 
 /* line 1, C:/Users/SPN Graphics/Desktop/CL September/Edu mark/207 Education/HTML/scss/_slider.scss */
 .slider_bg_1 {
-  background-image: url(../img/banner/fondosuperior1.jpg);
+  background-image: url(../img/banner/banner_1.png);
 }
 
 /* line 5, C:/Users/SPN Graphics/Desktop/CL September/Edu mark/207 Education/HTML/scss/_slider.scss */
@@ -1636,7 +1636,7 @@ h3 {
 
 /* line 1, C:/Users/SPN Graphics/Desktop/CL September/Edu mark/207 Education/HTML/scss/_footer.scss */
 .footer_bg_1 {
-  background-image: url(../img/banner/footer_bg.png);
+  background-image: url(../img/banner/footer_bg_1.png);
 }
 
 /* line 4, C:/Users/SPN Graphics/Desktop/CL September/Edu mark/207 Education/HTML/scss/_footer.scss */
@@ -2918,7 +2918,7 @@ h3 {
 
 /* line 1, C:/Users/SPN Graphics/Desktop/CL September/Edu mark/207 Education/HTML/scss/_course_details.scss */
 .courses_details_banner {
-  background-image: url(../img/banner/bradcam2.png);
+  background-image: url(../img/banner/bradcam2_1.png);
   padding-top: 186px;
   padding-bottom: 106px;
   background-size: cover;
@@ -3050,7 +3050,7 @@ h3 {
 /* line 97, C:/Users/SPN Graphics/Desktop/CL September/Edu mark/207 Education/HTML/scss/_course_details.scss */
 .courses_details_info .courses_sidebar {
   position: relative;
-  margin-top: -400px;
+  margin-top: -350px;
 }
 
 @media (max-width: 767px) {
@@ -6655,5 +6655,13 @@ h6 {
   margin-right: 10px;
   font-size: 12px;
 }
+
+/* Para Boder de fomulaio */
+.register-right {
+    background: #f8f9fa;
+    border-top-left-radius: 10% 50%;
+    border-bottom-left-radius: 10% 50%;
+}
+
 
 /*# sourceMappingURL=style.css.map */

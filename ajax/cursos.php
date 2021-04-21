@@ -4,7 +4,7 @@ require_once "../modelos/Curso.php";
 
 $curso=new Curso();
 
-$txt_dni=isset($_POST["txt_dni"])? limpiarCadena($_POST["txt_dni"]):"";
+$idcurso=isset($_POST["idcurso"])? limpiarCadena($_POST["idcurso"]):"";
 $txt_apenom=isset($_POST["txt_apenom"])? limpiarCadena($_POST["txt_apenom"]):"";
 $txt_celular=isset($_POST["txt_celular"])? limpiarCadena($_POST["txt_celular"]):"";
 $txt_email=isset($_POST["txt_email"])? limpiarCadena($_POST["txt_email"]):"";
@@ -19,17 +19,17 @@ switch ($_GET["op"]){
 	break;
 
 	case 'desactivar':
-		$rspta=$curso->desactivar($idemployee);
+		$rspta=$curso->desactivar($idcurso);
  		echo $rspta ? "Empleado Desactivado" : "Empleado no se puede desactivar";
 	break;
 
 	case 'activar':
-		$rspta=$curso->activar($idemployee);
+		$rspta=$curso->activar($idcurso);
  		echo $rspta ? "Empleado activado" : "Empleado no se puede activar";
 	break;
 
 	case 'mostrar':
-		$rspta=$curso->mostrar($idemployee);
+		$rspta=$curso->mostrar($idcurso);
  		//Codificar el resultado utilizando json
  		echo json_encode($rspta);
 	break;
@@ -46,24 +46,24 @@ switch ($_GET["op"]){
  		$data= "";
 
  		while ($reg=$rspta->fetch_object()){
- 			$data = 
+ 			$data = $data.
  				
  				'<div class="col-xl-4 col-lg-4 col-md-6">
                     <div class="single_courses">
                         <div class="thumb">
-                            <a href="course_details.php">
+                            <a href="detalles_curso.php?id='.$reg->id_curso.'">
                                 <img src="img/courses/'.$reg->img_curso.'" alt="">
                             </a>
                         </div>
 	                    <div class="courses_info">
 	                        <span>Curso</span>
-	                        <h3><a href="course_details.php">'.$reg->nombre_curso.'</a></h3>                                        
+	                        <h3><a href="detalles_curso.php?id='.$reg->id_curso.'">'.$reg->nombre_curso.'</a></h3>                                        
 	                        <div class="star_prise d-flex justify-content-between">
 	                            <div class="star">
 	                                <span>'.$reg->fecha_inicio.' - '.$reg->hora_inicio.'</span>
 	                            </div>
 	                            <div class="prise">
-	                                <a href="course_details.php" class="genric-btn success radius small">Registrarse</a>
+	                                <a href="detalles_curso.php?id='.$reg->id_curso.'" class="genric-btn success radius small">Registrarse</a>
 	                            </div>
 	                        </div>
 	                    </div>

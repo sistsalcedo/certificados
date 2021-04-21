@@ -20,7 +20,7 @@ require "header.php";
                             <h3>Siempre se trata de <br>
                                 <small>aprender algo y de pensar que puedes mejorar. </small>
                                 </h3>
-                            <a href="#" class="boxed_btn"><i class="fa fa-chevron-down"></i></a>
+                            <a href="#popular_courses" class="boxed_btn"><i class="fa fa-chevron-down"></i></a>
                         </div>
                     </div>
                 </div>
@@ -32,13 +32,13 @@ require "header.php";
 
 
     <!-- popular_courses_start -->
-    <div class="popular_courses">
+    <div class="popular_courses" id="popular_courses">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
                     <div class="section_title text-center mb-100">
                         <h3>Próximos Cursos</h3>
-                        <div id="cursos">
+                        <div id="cursos" class="row">
                             
                         </div>
                     </div>

@@ -55,7 +55,7 @@ function listarCursosPeoples()
 {
 	$.post('../../ajax/cursos.php?op=listarCursosPeoples', function(data, textStatus) {
 		//data = JSON.parse(data);	
-		console.log(data);
+		//console.log(data);
 
 		$("#cursos").html(data); 
 	});
