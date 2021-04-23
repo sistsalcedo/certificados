@@ -41,7 +41,7 @@
                         <div class="col-xl-2 col-lg-2">
                             <div class="logo-img">
                                 <a href="index.php">
-                                    <img src="img/logo.png" alt="">
+                                    <img src="img/logo_1.png" alt="">
                                 </a>
                             </div>
                         </div>
@@ -50,21 +50,18 @@
                                 <nav>
                                     <ul id="navigation">
                                         <li><a class="active" href="index.php">Cursos</a></li>
-                                        <li><a href="Courses.html">Certificados</a></li>
+                                        <li><a href="search_certificado.php">Certificados</a></li>
                                     </ul>
                                 </nav>
                             </div>
                         </div>
                         <div class="col-xl-3 col-lg-3 d-none d-lg-block">
                             <div class="log_chat_area d-flex align-items-center">
-                                <a href="#test-form" class="login popup-with-form">
-                                    <i class="flaticon-user"></i>
-                                    <span>Iniciar Sesión</span>
-                                </a>
+                               
                                 <div class="live_chat_btn">
                                     <a class="boxed_btn_orange" href="#">
-                                        <i class="fa fa-phone"></i>
-                                        <span>+10 378 467 3672</span>
+                                        <i class="flaticon-user"></i>
+                                    <span>Iniciar Sesión</span>
                                     </a>
                                 </div>
                             </div>

@@ -23,12 +23,12 @@
 
 		              <div class="col-md-12 col-sm-12 col-xs-12" style="padding-top: 100px">
 		                 
-		                 <div class="col-md-6 col-sm-12 col-xs-12 " align="center" style="padding-top: 150px">
+		                 <div class="col-md-4 col-sm-4 col-xs-12 " align="center" style="padding-top: 150px">
 		                 	<h1 style="color: white">Consulta de Certificados</h1>
 		                 	<p style="color: white">Aqui podra descargar los certificados en PDF, de los cursos que participó</p>
 		                 </div>
 
-		                 <div class="col-md-6 col-sm-12 col-xs-12">
+		                 <div class="col-md-8 col-sm-8 col-xs-12">
 
 			                 <div name="formularioConsulta" id="formularioConsulta" class="col-md-12 col-sm-12 col-xs-12 " style="background: #F3F3F3; padding: 50px; box-shadow: 0 0 30px 1px #337DC1; width: 400px; ">
 			                 		<div align="center">

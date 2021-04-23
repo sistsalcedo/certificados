@@ -9,9 +9,9 @@ function init(){
 		
 		e.preventDefault();
 		var txtdniOcelular = $('#txtdniOcelular').val();
-    	var txtemail = $('#txtemail').val();
+    	//var txtemail = $('#txtemail').val();
 
-    	verificar( txtdniOcelular, txtemail );
+    	verificar( txtdniOcelular );
 	})
 
 
@@ -116,9 +116,9 @@ function consultar(e)
 }
 
 //Funcion para poder verificar si alumno existe en la base de datos
-function verificar (txtdniOcelular, txtemail) {
+function verificar (txtdniOcelular) {
 
-	$.post('../../ajax/certificado.php?op=verificar', {txtdniOcelular: txtdniOcelular, txtemail: txtemail}, function(e) {
+	$.post('../../ajax/certificado.php?op=verificar', {txtdniOcelular: txtdniOcelular}, function(e) {
 		
 		if ( e == '1' ) {
 			console.log('Usuario  existe');
@@ -127,7 +127,8 @@ function verificar (txtdniOcelular, txtemail) {
 			//limpiar();
 
 		}else{
-			bootbox.alert(e);
+			//bootbox.alert(e);
+			Swal.fire({ title:'Aviso', text: e, footer: '<a href>Tiene problemas para descargar su certificado?</a>' });
 	    	limpiar();
 		}		
 	});	

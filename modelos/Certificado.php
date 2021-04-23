@@ -65,9 +65,9 @@ Class Certificado
 	}
 
 	//Implementar un método paraverificar si el alumno existe
-	public function verificar($txtdniOcelular, $txtemail)
+	public function verificar($txtdniOcelular)
 	{
-		$sql="SELECT id_alumno,dni,correo,celular FROM alumnos WHERE (dni = '$txtdniOcelular'  || celular = '$txtdniOcelular' ) && correo = '$txtemail'";
+		$sql="SELECT id_alumno,dni,correo,celular FROM alumnos WHERE (dni = '$txtdniOcelular'  || celular = '$txtdniOcelular' )";
 		return ejecutarConsultaSimpleFila($sql);		
 	}
 

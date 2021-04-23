@@ -1,6 +1,6 @@
 
     <!-- footer -->
-    <footer class="footer footer_bg_1">
+    <footer class="footer footer_bg_1 d-none d-sm-block">
         <div class="footer_top">
             <div class="container">
                 <div class="row">
@@ -104,6 +104,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> Toos 
 
 
     <!-- JS here -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="js/vendor/modernizr-3.5.0.min.js"></script>
     <script src="js/vendor/jquery-1.12.4.min.js"></script>
     <script src="js/popper.min.js"></script>
@@ -123,6 +124,17 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> Toos 
     <script src="js/plugins.js"></script>
     <script src="js/gijgo.min.js"></script>
 
+    <!-- Datatables -->
+    <!-- DATATABLES -->
+    <script src="../../public/datatables/jquery.dataTables.min.js"></script>    
+    <script src="../../public/datatables/dataTables.buttons.min.js"></script>
+    <script src="../../public/datatables/buttons.html5.min.js"></script>
+    <script src="../../public/datatables/buttons.colVis.min.js"></script>
+    <script src="../../public/datatables/jszip.min.js"></script>
+    <script src="../../public/datatables/pdfmake.min.js"></script>
+    <script src="../../public/datatables/vfs_fonts.js"></script> 
+
+    
     <!--contact js-->
     <script src="js/contact.js"></script>
     <script src="js/jquery.ajaxchimp.min.js"></script>

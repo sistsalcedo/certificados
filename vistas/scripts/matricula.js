@@ -2,7 +2,8 @@
 
 //Función que se ejecuta al inicio
 function init(){
-
+	mostrarFormularioMatricula(false);
+	ocultarBtnLimpiar();
 	$("#fomrularioRegistro").on("submit",function(e)
 	{
 		guardaryeditar(e);	
@@ -20,16 +21,66 @@ function limpiar()
 	$("#txt_celular").val("");	
 	$("#txt_email").val("");
 	$('#txt_dni').prop("readonly",false);
-	$('#txt_dni').attr("autofocus");		
+			
 
 }
 
+//Ocultar boton verificar 
+function limpiar_txt_dni(){
+	
+	//$("#btnVerificar").show();
+	ocultarBtnLimpiar();
+
+	limpiar();
+
+}
+
+function ocultarBtnLimpiar() {  
+	
+	$("#btnVerificar").show();
+	$("#limpiarDatos").hide();
+}
+
+function mostrarBtnLimpiar() {  
+	
+	$("#btnVerificar").hide();
+	$("#limpiarDatos").show();
+}
+
+//Función mostrar formulario
+function mostrarFormularioMatricula(flag)
+{
+	limpiar();
+	if (flag)
+	{
+		$("#listadoregistros").hide();
+		$("#buscarRegistros").hide();
+		$("#formularioregistros").show();
+		$("#btnGuardar").prop("disabled",false);
+	}
+	else
+	{
+		$("#listadoregistros").show(1000);
+		$("#buscarRegistros").show(1000);
+		$("#formularioregistros").fadeOut('slow');
+	}
+}
 
 //Función cancelarform
 function cancelarform()
 {
 	limpiar();
+	mostrarFormularioMatricula(false);
 }
+
+
+//Removiendo la imagen de Loading 
+function removerLoading()
+{
+	$('#loading').fadeOut(1000);			
+	$('#loading').remove();
+}
+
 
 //Función para guardar o editar
 function guardaryeditar(e)
@@ -48,8 +99,9 @@ function guardaryeditar(e)
 
 	    success: function(datos)
 	    {                    
-	          bootbox.alert(datos);	          
+	          Swal.fire('Bien Hecho',datos,'success');	          
 	          limpiar();
+	          mostrarFormularioMatricula(false);
 	          $("#btnGuardar").prop("disabled",false);
 	    }
 
@@ -69,26 +121,35 @@ function verificar_dni(){
 
 	if (dni != "" ) {
 
+		
+		mostrarBtnLimpiar();
+		$('#div_apenom').append('<div id="loading"><img src="../view_sise/img/loading.gif" alt="loading" width="50px" />Un momento, por favor...</div>');
 		var url = 'https://dniruc.apisperu.com/api/v1/dni/'+dni+'?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InNpc3RzYWxjZWRvQGdtYWlsLmNvbSJ9.P1giLK514zJDIcEE3nRZ6e7rpTdraowBBf2GbakxHJ8';
 		var data = $.getJSON(url, function(data){
-			
-			//var nombres =data.nombres;
-			//var apellidos = data.apellidoPaterno+" "+data.apellidoMaterno;
-			var apenom = data.apellidoPaterno+" "+data.apellidoMaterno+" "+data.nombres;
 
-			$('#txt_apenom').val(apenom);
-			$('#txt_dni').prop("readonly",true);	
+			if ( data.success == false ) {
+
+				Swal.fire({
+				  icon: 'error',
+				  title: 'Oops...',
+				  text: 'Ingresar un DNI válido.'
+				});
+				removerLoading();
+		   		limpiar_txt_dni();
+
+			} else {
+
+				var apenom = data.apellidoPaterno+" "+data.apellidoMaterno+" "+data.nombres;
+
+				removerLoading();
+				$('#txt_apenom').val(apenom);
+				$('#txt_dni').prop("readonly",true);
+			}				
 		});
 
-		  data.done(function(data) {
-		  
-		    
-		  });	
 
 	} else {
-		bootbox.alert("DEBE DE INGRESAR EL DNI DE LA PERSONA!", function(){
-			console.log('DEBE DE INGRESAR EL DNI DE LA PERSONA!'); 
-		});
+		Swal.fire('Aviso','Debe ingresar el numero de DNI');
 	}
 
 

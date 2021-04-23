@@ -50,8 +50,8 @@ switch ($_GET["op"]){
 
 
 	case 'verificar':
-		$rspta=$certificado->verificar($txtdniOcelular, $txtemail );
- 		echo $rspta ? "1" : "<p align='center'><strong>AVISO</strong></p> <br><br><table><tr><td><li>Ingrese los datos correctos.<br><li>Debe poner los mismos datos que ingresó en el <strong>proceso de registro</strong> al curso.</td></tr></table>";
+		$rspta=$certificado->verificar($txtdniOcelular );
+ 		echo $rspta ? "1" : "DNI no registrado.";
 	break;
 
 	case 'listar':

@@ -12,7 +12,7 @@ require "header.php";
                 <div class="row align-items-center justify-content-center">
                     <div class="col-xl-5 col-md-5">
                         <div class="illastrator_png">
-                            <img src="img/banner/edu_ilastration.png" alt="">
+                            <img class="img-fluid" src="img/computopj.gif" alt="">
                         </div>
                     </div>
                     <div class="col-xl-7 col-md-7">

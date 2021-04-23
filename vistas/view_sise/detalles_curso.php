@@ -15,7 +15,7 @@ $idcurso = $_GET['id'];
              <div class="row">
                  <div class="col-xl-6">
                      <div class="course_text">
-                            <h3 id="nombre_curso">UI/UX design with  Adobe XD with</h3>
+                            <h3 id="nombre_curso"></h3>
                            
                             <div class="rating">
                                 <i class="flaticon-mark-as-favorite-star"></i>
@@ -69,7 +69,8 @@ $idcurso = $_GET['id'];
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="boxed_btn">REGISTRARSE</a>
+                        <!-- <a onclick="mostrarFormularioMatricula(true)" class="boxed_btn">REGISTRARSE</a> -->
+                        <button type="submit" class="boxed_btn" onclick="mostrarFormularioMatricula(true)"> REGISTRARSE</button>  
                     </div>
                 </div>
             </div>
@@ -79,13 +80,13 @@ $idcurso = $_GET['id'];
     <div class="courses_details_banner" id="formularioregistros">
         <div class="container">
            <div class="row "   >
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 register-left">
-                    <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
-                    <h3>Welcome</h3>
-                    <p>You are 30 seconds away from earning your own money!</p>
-                    <input type="submit" name="" value="Login"/><br/>
+                <div class="col-lg-4 col-md-4 col-sm-4 d-none d-sm-block  align-self-center text-center">
+                    <img class="img-fluid" src="img/computopj.gif"  alt=""/>
+                    <div class="single_video">
+                      <h3 id="nombre_curso_frm" style="color:white;" >Welcome</h3>
+                    </div>
                 </div>
-                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 register-right" style="height: 450px; padding-top: 50px; padding-bottom: : 50px; padding-left: 100px; padding-right: 100px">
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 bg-white p-4" >
                     <div align="center">
                         <h3>Formulario de Registro</h3>
                     </div>
@@ -95,32 +96,35 @@ $idcurso = $_GET['id'];
                             <form name="fomrularioRegistro" id="fomrularioRegistro" method="POST">
                               <div class="row">
 
-                              <div class="form-group col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                              <div class="form-group col-lg-9 col-md-9 col-sm-9 col-xs-6">
                                 <label>DNI:</label> 
-                                <input type="text" class="form-control" name="txt_dni" id="txt_dni"  placeholder="Documento de Identidad" autofocus>
-                                <input type="hidden" value="5" name="id_curso" id="id_curso" >
+                                <input type="tel" class="form-control" name="txt_dni" id="txt_dni"  placeholder="Documento de Identidad" maxlength="8" required >
+                                <input type="hidden" name="id_curso" id="id_curso" >
                               </div>
-                              <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-2"> 
+                              <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-6"> 
                                 <label>-</label>                                
-                                 <button type="button" class="btn btn-primary waves-effect bottom" id="btnVerificar" name="btnverificar" onclick="verificar_dni()"><i class="fa fa-search"> </i> Verificar</button>
+                                 <button type="button" class="btn genric-btn info waves-effect bottom" id="btnVerificar" name="btnVerificar" onclick="verificar_dni()"><i class="fa fa-search"> </i> Verificar</button>
+                                  <button type="button" class="btn genric-btn primary  waves-effect bottom" id="limpiarDatos" name="limpiarDatos" onclick="limpiar_txt_dni()"><i class="fa fa-times"> </i> Limpiar</button>
                               </div>
-                              <div class="form-group col-lg-6col-md-6 col-sm-12 col-xs-12">
+                              <div class="form-group col-lg-6col-md-6 col-sm-12 col-xs-12" >
                                 <label>Apellidos y Nombres:</label> 
-                                <input type="text" class="form-control" name="txt_apenom" id="txt_apenom"  placeholder="Lectura anterior" readonly>
+                                <div id="div_apenom">
+                                  <input type="text" class="form-control" name="txt_apenom" id="txt_apenom"  placeholder="" readonly >
+                                </div>
                               </div>
                               <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                 <label>Celular:</label> 
-                                <input type="text" class="form-control" name="txt_celular" id="txt_celular"  placeholder="Lectura actual" >
+                                <input type="text" class="form-control" name="txt_celular" id="txt_celular"  placeholder="Ejemplo: 965214569" required >
                               </div>
                               <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                 <label>Correo:</label>
-                                <input type="text" class="form-control" name="txt_email" id="txt_email" >
+                                <input type="text" class="form-control" name="txt_email" id="txt_email" placeholder="Ejemplo: correo@dominio.com" required>
                               </div>                             
-
-                              <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" align="center">
-                                <button type="submit" class="btn btn-primary waves-effect"   id="btnGuardar"><i class="fa fa-save"> </i> Guardar</button>
-                                <button type="button" class="btn btn-danger waves-effect"  onclick="cancelarform()">Cancelar</button>
-                              </div>
+                              <br>
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" align="center">
+                                  <button type="submit" class="genric-btn success circle"   id="btnGuardar" ><i class="fa fa-save"> </i> GUARDAR</button>                               
+                                  <button type="button" class="genric-btn danger circle"  onclick="cancelarform()"><i class="fa fa-arrow-left fa-3"></i> </i>Cancelar</button>
+                                </div>
                               </div>
                          </form>
                         
@@ -135,7 +139,7 @@ $idcurso = $_GET['id'];
 
 
     <!-- testimonial_area_start -->
-    <div class="testimonial_area testimonial_bg_1 overlay">
+    <div class="testimonial_area testimonial_bg_1 overlay d-none d-sm-block">
         <div class="testmonial_active owl-carousel">
             <div class="single_testmoial">
                 <div class="container">
@@ -190,6 +194,7 @@ require "footer.php";
  ?>
 
   <script type="text/javascript" src="../scripts/detalle_curso.js"></script>
+  <script type="text/javascript" src="../scripts/matricula.js"></script>
   <script>
       detalleCurso('<?php echo $idcurso  ?>');
   </script>
