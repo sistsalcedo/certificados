@@ -111,3 +111,16 @@
     margin-bottom: -15%;
     color: #495057;
 }
+
+.margen-separacion-div-6-margen-derecho{
+    padding-left: 50px;
+}
+
+.margen-separacion-div-6-margen-izquierdo{
+    padding-right: 50px;
+}
+
+
+.margin-top-0{
+    margin-top: 0px;
+}

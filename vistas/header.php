@@ -27,7 +27,7 @@
     <link rel="stylesheet" type="text/css" href="../../public/css/bootstrap-select.min.css">
 
   </head>
-  <body class="hold-transition skin-red-light sidebar-mini">
+  <body class="sidebar-mini skin-red">
     <div class="wrapper">
 
       <header class="main-header">
@@ -35,7 +35,7 @@
         <!-- Logo -->
         <a href="index2.html" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><b></b>SISE</span>
+          <span class="logo-mini"><b></b>SISEC</span>
           <!-- logo for regular state and mobile devices -->
           <span class="logo-lg"><b></b>Sistema de Eventos</span>
         </a>

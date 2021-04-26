@@ -6679,3 +6679,41 @@ h6 {
     animation: mover 1s infinite alternate;
 }
 /*# sourceMappingURL=style.css.map */
+
+/* ? ----- Cuenta Regresiva ----- */
+#cuenta {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 100px;
+}
+
+.simply-section {
+  background: #fff;
+  width: 180px;
+  height: 180px;
+  margin: 0 20px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.simply-amount {
+  display: block;
+  font-size: 50px;
+  font-weight: 700;
+}
+
+.simply-word {
+  font-weight: 300;
+  font-size: 30px;
+}
+
+
+/* ? ---------------------------- */
+
+#clock {
+  font-size: 5em;
+  text-align: center;
+  margin: 1em;
+}

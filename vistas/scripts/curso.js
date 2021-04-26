@@ -2,16 +2,16 @@
 
 //Función que se ejecuta al inicio
 function init(){
+	mostrarform(false);
 	listarCursosPeoples();
+	listarvigentes();
+	listarConcluidos();
+	listarEliminados();
 
 	$("#formulario").on("submit",function(e)
 	{
 		
-		e.preventDefault();
-		var txtdniOcelular = $('#txtdniOcelular').val();
-    	var txtemail = $('#txtemail').val();
-
-    	verificar( txtdniOcelular, txtemail );
+		guardaryeditar(e);	
 	})
 
 
@@ -20,8 +20,22 @@ function init(){
 //Función limpiar
 function limpiar()
 {
-	$("#txtdniOcelular").val("");
-	$("#txtemail").val("");
+	$("#nombre_curso").val("");
+	$("#id_curso").val("");
+	$("#organizador").val("");
+	$("#modalidad_curso").val("");
+	$("#img_curso").val("");
+	$("#modelo_certificado_curso").val("");
+	$("#firma1_curso").val("");
+	$("#firma2_curso").val("");
+	$("#fecha_inicio").val("");
+	$("#hora_inicio").val("");
+	$("#fecha_fin").val("");
+	$("#hora_fin").val("");
+	$("#apenom_ponente").val("");
+	$("#cargo").val("");
+	$("#objetivo_curso").val("");
+
 
 }
 
@@ -40,6 +54,29 @@ function mostrardiv(flag)
 		$("#divResultado").hide();
 		$("#consultar").prop("disabled",false);
 		//$("#btnagregar").show();
+	}
+}
+
+
+
+//Función mostrar formulario
+function mostrarform(flag)
+{
+	limpiar();
+	if (flag)
+	{
+		$("#formulario_Para_GenerarEnlaces").hide();
+		$("#listadoregistros").hide();
+		$("#formularioregistros").show(300);
+		$("#btnGuardar").prop("disabled",false);
+		$("#btnagregar").hide();
+	}
+	else
+	{
+		$("#formulario_Para_GenerarEnlaces").hide();
+		$("#listadoregistros").show(300);
+		$("#formularioregistros").hide();
+		$("#btnagregar").show();
 	}
 }
 
@@ -117,6 +154,126 @@ function mostrarDatos(txtdniOcelular)
  	})
 }
 
+
+//Función Listar
+function listarvigentes()
+{
+	tabla=$('#tbllistadoVigentes').dataTable(
+	{
+		"lengthMenu": [ 5, 10, 25, 75, 100],//mostramos el menú de registros a revisar
+		"aProcessing": true,//Activamos el procesamiento del datatables
+	    "aServerSide": true,//Paginación y filtrado realizados por el servidor
+	    dom: '<Bl<f>rtip>',//Definimos los elementos del control de tabla
+	    buttons: [		          
+		            'copyHtml5',
+		            'excelHtml5',
+		            'csvHtml5',
+		            'pdf'
+		        ],
+		"ajax":
+				{
+					url: '../../ajax/cursos.php?op=listarCursosVigentes',
+					type : "get",
+					dataType : "json",						
+					error: function(e){
+						console.log(e.responseText);	
+					}
+				},
+		"language": {
+            "lengthMenu": "Mostrar : _MENU_ registros",
+            "buttons": {
+            "copyTitle": "Tabla Copiada",
+            "copySuccess": {
+                    _: '%d líneas copiadas',
+                    1: '1 línea copiada'
+                }
+            }
+        },
+		"bDestroy": true,
+		"iDisplayLength": 30,//Paginación
+	    "order": [[ 0, "desc" ]]//Ordenar (columna,orden)
+	}).DataTable();
+}
+
+function listarConcluidos()
+{
+	tabla=$('#tbllistadoConcluidos').dataTable(
+	{
+		"lengthMenu": [ 5, 10, 25, 75, 100],//mostramos el menú de registros a revisar
+		"aProcessing": true,//Activamos el procesamiento del datatables
+	    "aServerSide": true,//Paginación y filtrado realizados por el servidor
+	    dom: '<Bl<f>rtip>',//Definimos los elementos del control de tabla
+	    buttons: [		          
+		            'copyHtml5',
+		            'excelHtml5',
+		            'csvHtml5',
+		            'pdf'
+		        ],
+		"ajax":
+				{
+					url: '../../ajax/cursos.php?op=listarCursosConcluidos',
+					type : "get",
+					dataType : "json",						
+					error: function(e){
+						console.log(e.responseText);	
+					}
+				},
+		"language": {
+            "lengthMenu": "Mostrar : _MENU_ registros",
+            "buttons": {
+            "copyTitle": "Tabla Copiada",
+            "copySuccess": {
+                    _: '%d líneas copiadas',
+                    1: '1 línea copiada'
+                }
+            }
+        },
+		"bDestroy": true,
+		"iDisplayLength": 30,//Paginación
+	    "order": [[ 0, "desc" ]]//Ordenar (columna,orden)
+	}).DataTable();
+}
+
+function listarEliminados()
+{
+	tabla=$('#tbllistadoEliminados').dataTable(
+	{
+		"lengthMenu": [ 5, 10, 25, 75, 100],//mostramos el menú de registros a revisar
+		"aProcessing": true,//Activamos el procesamiento del datatables
+	    "aServerSide": true,//Paginación y filtrado realizados por el servidor
+	    dom: '<Bl<f>rtip>',//Definimos los elementos del control de tabla
+	    buttons: [		          
+		            'copyHtml5',
+		            'excelHtml5',
+		            'csvHtml5',
+		            'pdf'
+		        ],
+		"ajax":
+				{
+					url: '../../ajax/cursos.php?op=listarCursosEliminados',
+					type : "get",
+					dataType : "json",						
+					error: function(e){
+						console.log(e.responseText);	
+					}
+				},
+		"language": {
+            "lengthMenu": "Mostrar : _MENU_ registros",
+            "buttons": {
+            "copyTitle": "Tabla Copiada",
+            "copySuccess": {
+                    _: '%d líneas copiadas',
+                    1: '1 línea copiada'
+                }
+            }
+        },
+		"bDestroy": true,
+		"iDisplayLength": 30,//Paginación
+	    "order": [[ 0, "desc" ]]//Ordenar (columna,orden)
+	}).DataTable();
+}
+
+
 //Función Listar todos los certificados del alumno, que consulta en las WEB
 function listarCertificadosAlumno(txtdniOcelular)
 {
@@ -157,6 +314,65 @@ function listarCertificadosAlumno(txtdniOcelular)
 	    "order": [[ 0, "desc" ]],//Ordenar (columna,orden)
 	    'paging':      false
 	}).DataTable();
+}
+
+//Funcion que muestra los datos en la pantalla de vista usuarios . el contenido del curso.
+function mostrar(idcurso)
+{
+	$.post("../../ajax/cursos.php?op=mostrar",{idcurso : idcurso}, function(data, status)
+	{
+		data = JSON.parse(data);	
+		console.log(data);
+		mostrarform(true);
+
+		$("#id_curso").val(data.id_curso);
+		$("#nombre_curso").val(data.nombre_curso);
+		$("#organizador").val(data.organizador);
+		$("#modalidad_curso").val(data.modalidad_curso);
+		$("#img_curso_html").html(data.img_curso);
+		$("#certificado_html").html(data.modelo_certificado_curso);	
+		$("#firma1_html").html(data.firma1_curso);
+		$("#firma2_html").html(data.firma2_curso);	
+		$("#fecha_inicio").val(data.fecha_inicio);
+		$("#hora_inicio").val(data.hora_inicio);
+		$("#fecha_fin").val(data.fecha_fin);	
+		$("#hora_fin").val(data.hora_fin);	
+		$("#apenom_ponente").val(data.apenom_ponente);
+		$("#cargo").val(data.cargo);	
+		$("#objetivo_curso").val(data.objetivo_curso);
+ 	})
+}
+
+//Funcion que muestra los datos del curso en panel de administracion.
+
+
+//Función para guardar o editar
+
+function guardaryeditar(e)
+{
+	e.preventDefault(); //No se activará la acción predeterminada del evento
+	$("#btnGuardar").prop("disabled",true);
+	var formData = new FormData($("#formulario")[0]);
+
+	$.ajax({
+		url: "../../ajax/cursos.php?op=guardaryeditar",
+	    type: "POST",
+	    data: formData,
+	    contentType: false,
+	    processData: false,
+
+	    success: function(datos)
+	    {                    
+	          bootbox.alert(datos);	          
+	          mostrarform(false);
+	          listarvigentes();
+			  listarConcluidos();
+			  listarEliminados();
+	          tabla.ajax.reload();
+	    }
+
+	});
+	limpiar();
 }
 
 

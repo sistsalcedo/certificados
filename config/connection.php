@@ -2,7 +2,8 @@
 //include connection to data base
 $connection = new mysqli("localhost", "root", "", "farojeqn_bdpjhuanuco");
 $ruta = $_SERVER['DOCUMENT_ROOT'];
-$url = "csjhuanuco.com";
+$url = "https://csjhuanuco.com";
+$GLOBALS["url"];
 
 if (!function_exists('ejecutarConsulta'))
 {

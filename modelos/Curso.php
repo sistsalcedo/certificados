@@ -11,13 +11,13 @@ Class Curso
 	}
 
 	//Implementamos un método para insertar registros
-	public function insertar($txt_dni,$txt_apenom,$txt_email,$txt_celular,$id_curso)
+	public function insertar($nombre_curso, $organizador, $modalidad_curso, $img_curso, $modelo_certificado_curso, $firma1_curso, $firma2_curso, $fecha_inicio, $hora_inicio, $fecha_fin, $hora_fin, $apenom_ponente, $cargo, $objetivo_curso)
 	{
 		
-		$sql="INSERT INTO alumnos (dni,apenom,correo,celular)	 VALUES ( '$txt_dni', '$txt_apenom',  '$txt_email' ,'$txt_celular')";
-		$id_alumno = ejecutarConsulta_retornarID($sql);
+		$sql="INSERT INTO ponente (apenom_ponente,cargo)	 VALUES ( '$apenom_ponente', '$cargo')";
+		$id_ponente = ejecutarConsulta_retornarID($sql);
 
-		$sql1="INSERT INTO matricula ( id_curso,id_alumno) VALUES ('$id_curso','$id_alumno') ";
+		$sql1="INSERT INTO cursos ( nombre_curso, id_ponente, img_curso, modelo_certificado_curso, firma1_curso, firma2_curso, objetivo_curso, fecha_inicio, hora_inicio, fecha_fin, hora_fin, modalidad_curso, organizador ) VALUES ('$nombre_curso', '$id_ponente', '$img_curso', '$modelo_certificado_curso', '$firma1_curso', '$firma2_curso', '$objetivo_curso', '$fecha_inicio', '$hora_inicio', '$fecha_fin', '$hora_fin', '$modalidad_curso', '$organizador') ";
 		return ejecutarConsulta($sql1);
 	}
 
@@ -25,7 +25,7 @@ Class Curso
 
 
 	//Implementamos un método para editar registros
-	public function editar($idemployee,$dni,$nombres,$apellidos,$email,$phone,$dependencia,$cargo,$sede)
+	public function editar($idcurso,$nombre_curso, $organizador, $modalidad_curso, $img_curso, $modelo_certificado_curso, $firma1_curso, $firma2_curso, $fecha_inicio, $hora_inicio, $fecha_fin, $hora_fin, $apenom_ponente, $cargo, $objetivo_curso)
 	{
 		
 		$sql="UPDATE personas SET employee_dni = '$dni' , employee_name = '$nombres', employee_apellidos = '$apellidos', employee_email = '$email', employee_phone = '$phone', dependencia_iddependencia = '$dependencia', tpocargo_id = '$cargo', sedeid = '$sede'  WHERE  idemployee = '$idemployee'";
@@ -61,17 +61,29 @@ Class Curso
 	}
 
 
+	public function nombrecurso($idcurso){
+		$sql="SELECT nombre_curso  FROM cursos	WHERE id_curso = '$idcurso' ";
+		return ejecutarConsultaSimpleFila($sql);
+
+	}
+
 
 	//Implementar un método para listar los registros
-	public function listar()
+	public function listarCursosVigentes()
 	{
-		$sql="SELECT idemployee,employee_dni,employee_name,employee_apellidos,employee_avatar,employee_email,employee_phone,created_atempl, dependencia_iddependencia, dependencia.dep_descripcion ,tpocargo_id ,employee_tpocargo.tpocargo_name, sedeid, sede.sedecol_nombre , creadoPor, employee.condicion
-			FROM personas
-			INNER JOIN dependencia ON employee.dependencia_iddependencia = dependencia.iddependencia
-			INNER JOIN employee_tpocargo ON employee.tpocargo_id = employee_tpocargo.idtpocargo
-			INNER JOIN sede ON employee.sedeid = sede.idsede
-			WHERE idemployee != 100
-			ORDER BY employee_name ASC";
+		$sql="SELECT * FROM cursos  WHERE estado_curso = 'No realizado' AND  condicion = '1'  ORDER BY fecha_inicio DESC";
+		return ejecutarConsulta($sql);		
+	}
+
+	public function listarCursosConcluidos()
+	{
+		$sql="SELECT * FROM cursos  WHERE estado_curso = 'Realizado' AND  condicion = '1' ORDER BY fecha_inicio DESC";
+		return ejecutarConsulta($sql);		
+	}
+
+	public function listarCursosElimiandos()
+	{
+		$sql="SELECT * FROM cursos WHERE condicion = '0' ORDER BY fecha_inicio DESC";
 		return ejecutarConsulta($sql);		
 	}
 
