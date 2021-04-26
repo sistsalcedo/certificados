@@ -19,7 +19,7 @@ Class EnlacesUrl
 
 		$enlace_url = 'http://sisec.csjhuanuco.com/'.'vistas/view_sise/asistencia.php?reg='.$cadena_aleatoria.'&id='.$id_curso;
 
-		$sql="INSERT INTO enlaces_asistencia_curso (cadena_aleatoria, enlace_url, fechainicio_url, horainicio_url, duracion_min, momento_enlace_url, id_curso) 
+		$sql="INSERT INTO enlaces_asistencia_curso (cadena_aleatoria, enlace_url, fechainicio_url, horafin_url, duracion_min, momento_enlace_url, id_curso) 
 							VALUES ( '$cadena_aleatoria', '$enlace_url', '$fecha_inicio_enlace', '$hora_inicio_enlace', '$duracion_enlace', '$momento_enlace', '$id_curso' )";
 		return ejecutarConsulta($sql);
 	}
