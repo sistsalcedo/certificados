@@ -17,9 +17,9 @@ Class EnlacesUrl
 		$caracteres_permitidos = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		$cadena_aleatoria =  substr(str_shuffle($caracteres_permitidos), 0, 10);
 
-		$enlace_url = 'http://sisec.csjhuanuco.com/'.'vistas/view_sise/asistencia.php?reg='.$cadena_aleatoria.'&id='.$id_curso;
+		$enlace_url = 'http://sisec.csjhuanuco.com/'.'vistas/view_sise/asistencia.php?reg='.$cadena_aleatoria.'&id='.$id_curso.'&momento='.$momento_enlace;
 
-		$sql="INSERT INTO enlaces_asistencia_curso (cadena_aleatoria, enlace_url, fechainicio_url, horafin_url, duracion_min, momento_enlace_url, id_curso) 
+		$sql="INSERT INTO enlaces_asistencia_curso (cadena_aleatoria, enlace_url, fechainicio_url, horainicio_url, duracion_min, momento_enlace_url, id_curso) 
 							VALUES ( '$cadena_aleatoria', '$enlace_url', '$fecha_inicio_enlace', '$hora_inicio_enlace', '$duracion_enlace', '$momento_enlace', '$id_curso' )";
 		return ejecutarConsulta($sql);
 	}

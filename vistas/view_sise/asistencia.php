@@ -4,6 +4,7 @@ require "header.php";
 
 $idcurso = $_GET['id'];
 $cadena = $_GET['reg'];
+$momento = $_GET['momento'];
 
  ?>
 
@@ -18,8 +19,8 @@ $cadena = $_GET['reg'];
 
                   <div class="single_video">
                     <h1 id="nombre_curso_frm" style="color:white;" >ASISTENCIA</h1>
-                    <h2 style="color:white;">El enlace fue creado a las : 12-05-2021 y 12:00 pm</h2><br>
-                    <p style="color:orange;">Tiene un aduracion de <strong> 5 minutos </strong> a prtir de ese momento.</p>
+                    <h2 style="color:white;">Temporal</h2><br>
+                    
                   </div>
                 </div>
                 <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 bg-white p-4" id="div_asistencia" name ="div_asistencia" >
@@ -32,12 +33,13 @@ $cadena = $_GET['reg'];
                     <form name="fomrularioRegistroAsistencia" id="fomrularioRegistroAsistencia" method="POST">
                       <div class="row align-self-center text-center">
                         <div class="text-center">
-                          <h4>Curso:  COVID</h4>
+                          <!-- <h4>Curso:  COVID</h4> -->
                         </div>
                         <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-6">
                           <label>DNI:</label> 
                           <input type="tel" class="form-control" name="txt_dni" id="txt_dni"  placeholder="Documento de Identidad" maxlength="8" required >
                           <input type="hidden" name="id_curso" id="id_curso" value=" <?php  echo $idcurso ?> " >
+                          <input type="hidden" name="momento" id="momento" value=" <?php  echo $momento ?> " >
                         </div>                       
                         <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" align="center">
                           <button type="submit" class="genric-btn success circle"   id="consultar" ><i class="fa fa-save"> </i>Enviar</button>                               
@@ -51,7 +53,7 @@ $cadena = $_GET['reg'];
 
                  <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 bg-white p-4" id="div_registro" name ="div_registro" >
                   <div align="center">
-                    <h3>Completar Datos </h3>
+                    <h3>Confirmar Datos </h3>
                   </div>
                   <hr>
                   <div class="container">
@@ -63,6 +65,7 @@ $cadena = $_GET['reg'];
                                 <label>DNI:</label> 
                                 <input type="tel" class="form-control" name="txt_dni" id="txt_dni"  placeholder="Documento de Identidad" maxlength="8" required >
                                 <input type="hidden" name="id_curso" id="id_curso" >
+                                <input type="hidden" id="flag" name="flag" value="1">
                               </div>
                               <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-6"> 
                                 <label>-</label>                                
@@ -79,7 +82,7 @@ $cadena = $_GET['reg'];
                                 <label>Celular:</label> 
                                 <input type="text" class="form-control" name="txt_celular" id="txt_celular"  placeholder="Ejemplo: 965214569" required >
                               </div>
-                              <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                              <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12" >
                                 <label>Correo: <strong>(OPCIONAL</strong>)</label>
                                 <input type="text" class="form-control" name="txt_email" id="txt_email" placeholder="Ejemplo: correo@dominio.com" required>
                               </div>                             

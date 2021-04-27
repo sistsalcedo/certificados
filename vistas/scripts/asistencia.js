@@ -10,8 +10,14 @@ function init(){
 		e.preventDefault();
 		var txt_dni = $('#txt_dni').val();
     	var id_curso = $('#id_curso').val();
+    	var momento = $('#momento').val();
 
-    	verificar( txt_dni, id_curso );
+    	verificar( txt_dni, id_curso, momento );
+	})
+
+	$("#fomrularioRegistro").on("submit",function(e)
+	{
+		guardaryeditar(e);	
 	})
 
 
@@ -26,8 +32,8 @@ function asistencia (idcurso, cadena)
 //Función limpiar
 function limpiar()
 {
-	$("#txtdniOcelular").val("");
-	$("#txtemail").val("");
+	$("#txt_dni").val("");
+	
 
 }
 
@@ -57,117 +63,78 @@ function cancelarform()
 }
 
 
-//Función para guardar o editar
 
-function consultar(e)
-{
-	e.preventDefault(); //No se activará la acción predeterminada del evento
-	$("#consultar").prop("disabled",true);
-	var formData = new FormData($("#fomrularioRegistroAsistencia")[0]);
-
-	$.ajax({
-		url: "../../ajax/certificado.php?op=consultar",
-	    type: "POST",
-	    data: formData,
-	    contentType: false,
-	    processData: false,
-
-	    success: function(datos)
-	    {                    
-	          bootbox.alert(datos);	          
-	          mostrarform(false);
-	          tabla.ajax.reload();
-	    }
-
-	});
-	limpiar();
-}
 
 //Funcion para poder verificar si alumno existe en la base de datos
-function verificar (txt_dni, id_curso) {
+function verificar (txt_dni, id_curso,momento ) {
 
-	$.post('../../ajax/asistencia.php?op=verificar', {txt_dni: txt_dni, id_curso: id_curso}, function(e) {
-		
-		if ( e == '1' ) {
-			console.log('Usuario  existe');
+
+	$.post("../../ajax/asistencia.php?op=verificar",{txt_dni: txt_dni, id_curso: id_curso, momento: momento}, function(data, status)
+	{
+			
+		console.log(data);
+
+
+		if ( data != null ) {
+			data = JSON.parse(data);
 			alert('Usario matriculado en el curso');
-			//marcarAsistencia(txt_dni, id_curso);
+			marcarAsistencia(txt_dni, id_curso, momento);
 			limpiar();
 
 		}else{
-			//alert('Tiene q registrarte');
-			registrar(txt_dni, id_curso);
+			alert('Usario no matriculado');
+			//preguntarse_EXxistira_usuario(txt_dni, id_curso);
 			//mostrardiv(true);
 			//Swal.fire({ title:'Aviso', text: e, footer: '<a href>Tiene problemas para descargar su certificado?</a>' });
 	    	limpiar();
-		}		
-	});	
+		}
+ 		
+ 	})
+
+	// $.post('../../ajax/asistencia.php?op=verificar', {txt_dni: txt_dni, id_curso: id_curso, momento: momento}, function(data, status) {
+		
+		
+			
+	// });	
 }
 
+function  marcarAsistencia(txt_dni, id_curso, momento) {
 
-function mostrarDatos(txtdniOcelular)
-{
-	$.post("../../ajax/certificado.php?op=mostrarDatos",{txtdniOcelular : txtdniOcelular}, function(data, status)
+
+	$.post("../../ajax/asistencia.php?op=marcarAsistencia",{txt_dni : txt_dni, id_curso : id_curso, momento : momento  }, function(data, status)
 	{
+			alert(data);	
+			console.log(data)	;
+ 	})
+
+}
+
+function preguntarse_EXxistira_usuario(txt_dni, id_curso)
+{
+	$.post('../../ajax/asistencia.php?op=verificar_ex', {txt_dni: txt_dni, id_curso: id_curso},  function(data, status) {
+		
 		data = JSON.parse(data);	
 		console.log(data);
-		mostrardiv(true);
-
-		$("#datosAlumno").html(data.apenom); 		
- 	})
-}
-
-//Función Listar todos los certificados del alumno, que consulta en las WEB
-function listarCertificadosAlumno(txtdniOcelular)
-{
-	tabla=$('#tbllistado').dataTable(
-	{
-		
-		"aProcessing": true,//Activamos el procesamiento del datatables
-	    "aServerSide": true,//Paginación y filtrado realizados por el servidor
-	    /*dom: '<Bl<f>rtip>',//Definimos los elementos del control de tabla
-	    buttons: [		          
-		            'copyHtml5',
-		            'excelHtml5',
-		            'csvHtml5',
-		            'pdf'
-		        ],*/
-		"ajax":
-				{
-					url: '../../ajax/certificado.php?op=listarCertificadosAlumno&txtdniOcelular='+txtdniOcelular,
-					type : "get",
-					dataType : "json",						
-					error: function(e){
-						console.log(e.responseText);	
-					}
-				},
-		/*"language": {
-            "lengthMenu": "Mostrar : _MENU_ registros",
-            "buttons": {
-            "copyTitle": "Tabla Copiada",
-            "copySuccess": {
-                    _: '%d líneas copiadas',
-                    1: '1 línea copiada'
-                }
-            }
-        },*/
-		"bDestroy": true,
-		"searching": false,
-		"iDisplayLength": 5,//Paginación
-	    "order": [[ 0, "desc" ]],//Ordenar (columna,orden)
-	    'paging':      false
-	}).DataTable();
-}
-
-function  marcarAsistencia(txt_dni, id_curso) {
 
 
-	$.post("../../ajax/asistencia.php?op=marcarAsistencia",{txt_dni : txt_dni, id_curso : id_curso }, function(data, status)
-	{
-				
- 	})
+		if ( data != null ) {
+			alert('Usario si existe en la base de datos');
+			//matricularlo(txt_dni, id_curso, momento);
+			//limpiar();
+
+		}else{
+			alert('Usario  no existe en la base de datos');
+			mostrardiv(true);
+			//crearusuario;
+			//matricularlo(txt_dni, id_curso, momento);
+			//marcarAsistencia(txt_dni, id_curso, momento);
+	    	//limpiar();
+		}
+
+	});	
 
 }
+
 
 function registrar(txt_dni, id_curso)
 {
@@ -181,5 +148,103 @@ function registrar(txt_dni, id_curso)
  	})
 
 }
+
+
+function verificar_dni(){
+
+
+	var dni = $('#txt_dni').val();
+	var nombres = "";
+	var apellidos = "";
+
+
+	if (dni != "" ) {
+
+		
+		mostrarBtnLimpiar();
+		$('#div_apenom').append('<div id="loading"><img src="../view_sise/img/loading.gif" alt="loading" width="50px" />Un momento, por favor...</div>');
+		var url = 'https://dniruc.apisperu.com/api/v1/dni/'+dni+'?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InNpc3RzYWxjZWRvQGdtYWlsLmNvbSJ9.P1giLK514zJDIcEE3nRZ6e7rpTdraowBBf2GbakxHJ8';
+		var data = $.getJSON(url, function(data){
+
+			if ( data.success == false ) {
+
+				Swal.fire({
+				  icon: 'error',
+				  title: 'Oops...',
+				  text: 'Ingresar un DNI válido.'
+				});
+				removerLoading();
+		   		limpiar_txt_dni();
+
+			} else {
+
+				var apenom = data.apellidoPaterno+" "+data.apellidoMaterno+" "+data.nombres;
+
+				removerLoading();
+				$('#txt_apenom').val(apenom);
+				$('#txt_dni').prop("readonly",true);
+			}				
+		});
+
+
+	} else {
+		Swal.fire('Aviso','Debe ingresar el numero de DNI');
+	}
+
+
+}
+
+
+function ocultarBtnLimpiar() {  
+	
+	$("#btnVerificar").show();
+	$("#limpiarDatos").hide();
+}
+
+function mostrarBtnLimpiar() {  
+	
+	$("#btnVerificar").hide();
+	$("#limpiarDatos").show();
+}
+
+
+//Removiendo la imagen de Loading 
+function removerLoading()
+{
+	$('#loading').fadeOut(1000);			
+	$('#loading').remove();
+}
+
+
+
+//Función para guardar o editar
+function guardaryeditar(e)
+{
+
+	e.preventDefault(); //No se activará la acción predeterminada del evento
+	$("#btnRegistrar").prop("disabled",true);
+	var formData = new FormData($("#fomrularioRegistro")[0]);
+
+	$.ajax({
+		url: "../../ajax/asistencia.php?op=guardaryeditar",
+	    type: "POST",
+	    data: formData,
+	    contentType: false,
+	    processData: false,
+
+	    success: function(datos)
+	    {                    
+	          Swal.fire('Bien Hecho',datos,'success');	          
+	          limpiar();
+	          mostrardiv(false);
+	          $("#btnRegistrar").prop("disabled",false);
+	    }
+
+	});
+	limpiar();
+
+	
+}
+
 
 init();

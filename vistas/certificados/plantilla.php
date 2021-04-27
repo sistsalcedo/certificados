@@ -14,10 +14,10 @@
 
 		function Header()
 		{
-			$this->Image('../../files/imagenes/pjlogo.png', 135, 15, 30 );
-			$this->Ln(1);
+			//$this->Image('../../files/imagenes/pjlogo.png', 135, 15, 30 );
+			//$this->Ln(1);
 
-			$this->Image('../../files/imagenes/marco.png', -6, -5, 310 );
+			$this->Image('../../files/imagenes/modelo_cer.png', 1, -1, 295 );
 			$this->Ln(1);
 		}
 		

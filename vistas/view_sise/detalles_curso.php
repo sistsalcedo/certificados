@@ -100,9 +100,11 @@ $idcurso = $_GET['id'];
                                 <label>DNI:</label> 
                                 <input type="tel" class="form-control" name="txt_dni" id="txt_dni"  placeholder="Documento de Identidad" maxlength="8" required >
                                 <input type="hidden" name="id_curso" id="id_curso" >
+                                <input type="hidden" id="flag" name="flag" value="0">
                               </div>
                               <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-6"> 
-                                <label>-</label>                                
+                                <label>-</label>  
+                                <div></div>                              
                                  <button type="button" class="btn genric-btn info waves-effect bottom" id="btnVerificar" name="btnVerificar" onclick="verificar_dni()"><i class="fa fa-search"> </i> Verificar</button>
                                   <button type="button" class="btn genric-btn primary  waves-effect bottom" id="limpiarDatos" name="limpiarDatos" onclick="limpiar_txt_dni()"><i class="fa fa-times"> </i> Limpiar</button>
                               </div>

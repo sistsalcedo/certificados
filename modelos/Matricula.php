@@ -11,7 +11,7 @@ Class Matricula
 	}
 
 	//Implementamos un método para insertar registros
-	public function insertar($txt_dni,$txt_apenom,$txt_email,$txt_celular,$id_curso)
+	public function insertar($txt_dni,$txt_apenom,$txt_email,$txt_celular,$id_curso, $flag)
 	{
 		
 		$sql="INSERT INTO alumnos (dni,apenom,correo,celular)	 VALUES ( '$txt_dni', '$txt_apenom',  '$txt_email' ,'$txt_celular')";
@@ -19,6 +19,14 @@ Class Matricula
 
 		$sql1="INSERT INTO matricula ( id_curso,id_alumno) VALUES ('$id_curso','$id_alumno') ";
 		return ejecutarConsulta($sql1);
+
+		if ($flag == 1) {
+			$sql1="INSERT INTO asistenciacursos ( id_curso,id_alumno, fecha_ingreso) VALUES ('$id_curso','$id_alumno' , time ()) ";
+			return ejecutarConsulta($sql1);
+
+		} else {
+			
+		}
 	}
 
 	

@@ -2,7 +2,7 @@
 //Incluímos inicialmente la conexión a la base de datos
 require "../config/connection.php";
 
-Class Certificado
+Class Asistencia
 {
 	//Implementamos nuestro constructor
 	public function __construct()
@@ -11,18 +11,40 @@ Class Certificado
 	}
 
 	//Implementamos un método para insertar registros
-	public function insertar($tpo_equipocol_nombre)
+		public function insertar($txt_dni,$txt_apenom,$txt_email,$txt_celular,$id_curso, $flag)
 	{
-		$sql="INSERT INTO inv_equipo_tpo (tpo_equipocol_nombre) VALUES ( '$tpo_equipocol_nombre')";
-		return ejecutarConsulta($sql);
+		
+		$sql="INSERT INTO alumnos (dni,apenom,correo,celular)	 VALUES ( '$txt_dni', '$txt_apenom',  '$txt_email' ,'$txt_celular')";
+		$id_alumno = ejecutarConsulta_retornarID($sql);
+
+		$sql1="INSERT INTO matricula ( id_curso,id_alumno) VALUES ('$id_curso','$id_alumno') ";
+		return ejecutarConsulta($sql1);
+		
 	}
 
-
 	//Implementamos un método para insertar registros
-	public function marcarAsistencia($txt_dni, $id_curso)
+	public function marcarAsistencia($txt_dni, $id_curso, $momento)
 	{
-		$sql="INSERT INTO matricula (id_curso, id_alumno) VALUES ( '$id_curso', '$txt_dni')";
-		return ejecutarConsulta($sql);
+		
+		$sql1="SELECT id_alumno FROM alumnos WHERE dni='$txt_dni'";
+		$rs = ejecutarConsultaSimpleFila($sql1);
+		$id_alumno = $rs['id_alumno'];
+
+
+
+		if(  $momento == 'inicio'   ){
+
+			$sql="INSERT INTO asistenciacursos (id_curso, id_alumno, fecha_ingreso) VALUES ( '$id_curso' , '$id_alumno', NOW() )";
+			return ejecutarConsulta($sql);
+
+		}elseif( $momento == 'medio' ){
+
+			$sql="INSERT INTO asistenciacursos (id_curso, id_alumno, fecha_intermedia) VALUES ( '$id_curso' , '$id_alumno', NOW() )";
+			return ejecutarConsulta($sql);
+		}else {
+			$sql="INSERT INTO asistenciacursos (id_curso, id_alumno, fecha_salida) VALUES ( '$id_curso' , '$id_alumno', NOW() )";
+			return ejecutarConsulta($sql);
+		}
 	}
 
 	//Implementamos un método para editar registros
@@ -73,12 +95,24 @@ Class Certificado
 	}
 
 	//Implementar un método paraverificar si el alumno existe
-	public function verificar($txtdniOcelular, $id_curso)
-	{
-		$sql="SELECT * FROM matricula INNER JOIN alumnos ON matricula.id_alumno = alumnos.id_alumno WHERE alumnos.id_alumno = '$txtdniOcelular' AND id_curso =  '$id_curso' ";
+	public function verificar($txt_dni, $id_curso ,$momento)
+	{	
+		$sql1="SELECT id_alumno FROM alumnos WHERE dni='$txt_dni'";
+		$rs = ejecutarConsultaSimpleFila($sql1);
+		$id_alumno = $rs['id_alumno'];
+
+
+		$sql="SELECT * FROM matricula WHERE id_curso = '$id_curso' AND id_alumno = '$id_alumno' ";
 		return ejecutarConsultaSimpleFila($sql);		
 	}
 
+
+//Implementar un método paraverificar si el alumno existe
+	public function verificar_ex($txt_dni, $id_curso ,$momento)
+	{	
+		$sql1="SELECT id_alumno FROM alumnos WHERE dni='$txt_dni'";		
+		return ejecutarConsultaSimpleFila($sql1);		
+	}
 
 	//Implementar un método para listar los registros
 	public function consultar( $txtdniOcelular, $txtemail  )

@@ -121,8 +121,8 @@ require '../header.php';
                                         <p for="nombre_curso" class="col-sm-3 control-label">Modalidad: </p>
                                         <div class="col-sm-9">
                                           <select id="modalidad_curso" name="modalidad_curso" class="form-control" required>
-                                            <option value="1" selected>Virtual</option>
-                                            <option value="2">Presencial</option>
+                                            <option value="Modalidad Virtual" selected>Virtual</option>
+                                            <option value="Modalidad Presencial">Presencial</option>
                                           </select>
                                         </div>
                                       </div>
