@@ -141,7 +141,7 @@ switch ($_GET["op"]){
  			$data = $data.
  				
  				'<div class="col-xl-4 col-lg-4 col-md-6">
-                    <div class="single_courses">
+                    <div class="single_courses bg-white">
                         <div class="thumb" style=" height: 300px">
                             <a href="detalles_curso.php?id='.$reg->id_curso.'">
                                 <img   class="img-responsive" src="../../files/imagen_curso/'.$reg->img_curso.'" alt="">
