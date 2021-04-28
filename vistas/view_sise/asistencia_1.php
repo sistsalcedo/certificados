@@ -2,7 +2,7 @@
 
 require "header.php";
 
-$id_curso = $_GET['id'];
+$idcurso = $_GET['id'];
 $cadena = $_GET['reg'];
 $momento = $_GET['momento'];
 
@@ -14,7 +14,7 @@ $momento = $_GET['momento'];
     <div class="slider_area ">
         <div class="single_slider d-flex align-items-center justify-content-center slider_bg_1">
             <div class="container">
-              <div class="row align-items-center text-center" id="todo_bien">
+              <div class="row align-items-center text-center">
                 <div class="col-lg-5 col-md-5 col-sm-5   align-self-center text-center">
 
                   <div class="single_video">
@@ -63,8 +63,8 @@ $momento = $_GET['momento'];
 
                               <div class="form-group col-lg-9 col-md-9 col-sm-9 col-xs-6">
                                 <label>DNI:</label> 
-                                <input type="tel" class="form-control" name="txt_dni_p_registrar" id="txt_dni_p_registrar"  placeholder="Documento de Identidad" maxlength="8" required >
-                                <input type="hidden" name="id_curso_p_registrar" id="id_curso_p_registrar" >
+                                <input type="tel" class="form-control" name="txt_dni" id="txt_dni"  placeholder="Documento de Identidad" maxlength="8" required >
+                                <input type="hidden" name="id_curso" id="id_curso" >
                                 <input type="hidden" id="flag" name="flag" value="1">
                               </div>
                               <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-6"> 
@@ -77,7 +77,15 @@ $momento = $_GET['momento'];
                                 <div id="div_apenom">
                                   <input type="text" class="form-control" name="txt_apenom" id="txt_apenom"  placeholder="" readonly >
                                 </div>
-                              </div>                                                         
+                              </div>
+                              <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <label>Celular:</label> 
+                                <input type="text" class="form-control" name="txt_celular" id="txt_celular"  placeholder="Ejemplo: 965214569" required >
+                              </div>
+                              <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12" >
+                                <label>Correo: <strong>(OPCIONAL</strong>)</label>
+                                <input type="text" class="form-control" name="txt_email" id="txt_email" placeholder="Ejemplo: correo@dominio.com" required>
+                              </div>                             
                               <br>
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" align="center">
                                   <button type="submit" class="genric-btn success circle"   id="btnRegistrar" ><i class="fa fa-save"> </i> GUARDAR</button>                               
@@ -89,10 +97,6 @@ $momento = $_GET['momento'];
                   </div>
                 </div>
 
-              </div>
-              <div id="errores" class="col-lg-12 col-md-12 col-sm-12   align-self-center text-center">
-                <h2 class="text-white"> Pagina no encontrada..</h2 class="text-white">
-                <a class="boxed_btn_orange" href=" index.php">Regresar a la pagina principal</a>
               </div>
             </div>
           </div>
@@ -111,10 +115,10 @@ $momento = $_GET['momento'];
 require "footer.php";
 
  ?>
-<!-- 
-<script src="../scripts/cuenta_regresiva.js"></script>   -->
+
+<script src="../scripts/cuenta_regresiva.js"></script>  
 <script src="../scripts/asistencia.js"></script>  
   <script>
-     
-      validar_url('<?php echo $id_curso  ?>','<?php echo $cadena  ?>','<?php echo $momento  ?>');
+      cuenta_regresiva('<?php echo $idcurso  ?>','<?php echo $cadena  ?>');
+      asistencia('<?php echo $idcurso  ?>','<?php echo $cadena  ?>');
   </script>

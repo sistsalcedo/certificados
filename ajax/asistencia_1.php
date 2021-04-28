@@ -8,10 +8,9 @@ $asistencia=new Asistencia();
 $txt_dni=isset($_POST["txt_dni"])? limpiarCadena($_POST["txt_dni"]):"";
 $id_curso=isset($_POST["id_curso"])? limpiarCadena($_POST["id_curso"]):"";
 $txt_apenom=isset($_POST["txt_apenom"])? limpiarCadena($_POST["txt_apenom"]):"";
-// $txt_email=isset($_POST["txt_email"])? limpiarCadena($_POST["txt_email"]):"";
-// $txt_celular=isset($_POST["txt_celular"])? limpiarCadena($_POST["txt_celular"]):"";
-// $flag=isset($_POST["flag"])? limpiarCadena($_POST["flag"]):"";
-$cadena=isset($_POST["cadena"])? limpiarCadena($_POST["cadena"]):"";
+$txt_email=isset($_POST["txt_email"])? limpiarCadena($_POST["txt_email"]):"";
+$txt_celular=isset($_POST["txt_celular"])? limpiarCadena($_POST["txt_celular"]):"";
+$flag=isset($_POST["flag"])? limpiarCadena($_POST["flag"]):"";
 $momento=isset($_POST["momento"])? limpiarCadena($_POST["momento"]):"";
 
 switch ($_GET["op"]){
@@ -65,17 +64,6 @@ switch ($_GET["op"]){
 		
 		echo $rspta ? "Control de Asistencia realizada" : "Control de Asistencia no se puedo realizar";
 
-	break;
-
-	case 'validar_url':
-		$rspta=$asistencia->validar_url($id_curso , $cadena);
- 		echo json_encode($rspta);
-	break;
-
-
-	case 'si_enlace_vigente':
-		$rspta=$asistencia->si_enlace_vigente($id_curso , $cadena);
- 		echo json_encode($rspta);
 	break;
 
 	case 'registrar':

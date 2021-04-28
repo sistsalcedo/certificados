@@ -11,7 +11,7 @@ Class EnlacesUrl
 	}
 
 	//Implementamos un método para insertar registros
-	public function insertar($id_curso, $momento_enlace, $fecha_inicio_enlace, $hora_inicio_enlace, $duracion_enlace)
+	public function insertar($id_curso, $momento_enlace, $fecha_inicio_enlace, $hora_inicio_enlace)
 	{
 
 		$caracteres_permitidos = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -19,13 +19,13 @@ Class EnlacesUrl
 
 		$enlace_url = 'http://sisec.csjhuanuco.com/'.'vistas/view_sise/asistencia.php?reg='.$cadena_aleatoria.'&id='.$id_curso.'&momento='.$momento_enlace;
 
-		$sql="INSERT INTO enlaces_asistencia_curso (cadena_aleatoria, enlace_url, fechainicio_url, horainicio_url, duracion_min, momento_enlace_url, id_curso) 
-							VALUES ( '$cadena_aleatoria', '$enlace_url', '$fecha_inicio_enlace', '$hora_inicio_enlace', '$duracion_enlace', '$momento_enlace', '$id_curso' )";
+		$sql="INSERT INTO enlaces_asistencia_curso (cadena_aleatoria, enlace_url, fechainicio_url, horainicio_url, momento_enlace_url, id_curso) 
+							VALUES ( '$cadena_aleatoria', '$enlace_url', '$fecha_inicio_enlace', '$hora_inicio_enlace',  '$momento_enlace', '$id_curso' )";
 		return ejecutarConsulta($sql);
 	}
 
 	//Implementamos un método para editar registros
-	public function editar($id_curso, $momento_enlace, $fecha_inicio_enlace, $hora_inicio_enlace, $duracion_enlace)
+	public function editar($id_curso, $momento_enlace, $fecha_inicio_enlace, $hora_inicio_enlace)
 	{
 		
 		$sql="UPDATE inv_equipo_tpo SET tpo_equipocol_nombre = '$tpo_equipocol_nombre'  WHERE  idtpo_equipo = '$idtpo_equipo'";

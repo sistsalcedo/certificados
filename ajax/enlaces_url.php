@@ -11,18 +11,18 @@ $id_curso_enlace=isset($_POST["id_curso_enlace"])? limpiarCadena($_POST["id_curs
 $momento_enlace=isset($_POST["momento_enlace"])? limpiarCadena($_POST["momento_enlace"]):"";
 $fecha_inicio_enlace=isset($_POST["fecha_inicio_enlace"])? limpiarCadena($_POST["fecha_inicio_enlace"]):"";
 $hora_inicio_enlace=isset($_POST["hora_inicio_enlace"])? limpiarCadena($_POST["hora_inicio_enlace"]):"";
-$duracion_enlace=isset($_POST["duracion_enlace"])? limpiarCadena($_POST["duracion_enlace"]):"";
+// $duracion_enlace=isset($_POST["duracion_enlace"])? limpiarCadena($_POST["duracion_enlace"]):"";
 
 switch ($_GET["op"]){
 	case 'guardaryeditar':
 
 		
 		if (empty($id_enlace_curso)){
-			$rspta=$enlacesUrl->insertar($id_curso_enlace, $momento_enlace, $fecha_inicio_enlace, $hora_inicio_enlace, $duracion_enlace);
+			$rspta=$enlacesUrl->insertar($id_curso_enlace, $momento_enlace, $fecha_inicio_enlace, $hora_inicio_enlace);
 			echo $rspta ? "Enlace registrada" : "Enlace no se pudo registrar";
 		}
 		else {
-			$rspta=$enlacesUrl->editar($id_enlace_curso, $id_curso_enlace, $momento_enlace, $fecha_inicio_enlace, $hora_inicio_enlace, $duracion_enlace);
+			$rspta=$enlacesUrl->editar($id_enlace_curso, $id_curso_enlace, $momento_enlace, $fecha_inicio_enlace, $hora_inicio_enlace);
 			echo $rspta ? "Enlace actualizada" : "Enlace no se pudo actualizar";
 		}
 	break;

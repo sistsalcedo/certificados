@@ -3,17 +3,16 @@
 //Función que se ejecuta al inicio
 function init(){
 	mostrardiv(false);
-	mostrardiv(false);
 
 	$("#fomrularioRegistroAsistencia").on("submit",function(e)
 	{
 		
-		// e.preventDefault();
-		// var txt_dni = $('#txt_dni').val();
-  //   	var id_curso = $('#id_curso').val();
-  //   	var momento = $('#momento').val();
+		e.preventDefault();
+		var txt_dni = $('#txt_dni').val();
+    	var id_curso = $('#id_curso').val();
+    	var momento = $('#momento').val();
 
-  //   	verificar( txt_dni, id_curso, momento );
+    	verificar( txt_dni, id_curso, momento );
 	})
 
 	$("#fomrularioRegistro").on("submit",function(e)
@@ -24,90 +23,12 @@ function init(){
 
 }
 
-function mostrar_pagina(flag)
+
+function asistencia (idcurso, cadena)
 {
-	if (flag)
-	{
-		$("#errores").hide();
-		$("#todo_bien").show();
-	}
-	else
-	{
-		$("#errores").show();
-		$("#todo_bien").hide();
-	}
-}
 
-function validar_url(id_curso, cadena, momento )
-{
-		$.post("../../ajax/asistencia.php?op=validar_url",{id_curso : id_curso, cadena : cadena}, function(data, status)
-	{
-		
-		console.log(data);
-		if (data != 'null') {
-
-			console.log('enlace valido');
-			si_enlace_vigente( id_curso, cadena );
-			//limpiar();
-			//ocultarBtnLimpiar();
-			//mostrarFormularioMatricula(false);
-
-
-		} else {
-
-			swal.fire({
-	             icon: 'error',
-	  				title: 'Oops...',
-	  				text: 'Este enlace para la asistecnia no el Valido, solicitar el correcto'
-	        });
-	        mostrar_pagina(false);
-
-
-
-		}			
- 	})
 
 }
-
-function si_enlace_vigente(id_curso, cadena )
-{
-		$.post("../../ajax/asistencia.php?op=si_enlace_vigente",{id_curso : id_curso, cadena : cadena}, function(data, status)
-	{
-		
-
-		if (data != 'null') {
-
-			console.log('enlace vigente');
-			mostrar_pagina(true);
-			mostrardiv(false);
-			//limpiar();
-			//ocultarBtnLimpiar();
-			//mostrarFormularioMatricula(false);
-
-
-		} else {
-
-			swal.fire({
-	             icon: 'error',
-	  				title: 'Oops...',
-	  				text: 'Este enlace para la asistencia al curso ya no esta vigente.'
-	        });
-	        mostrar_pagina(false);
-
-
-
-		}			
- 	})
-
-}
-
-
-
-
-
-
-
-
 //Función limpiar
 function limpiar()
 {
@@ -142,19 +63,7 @@ function cancelarform()
 }
 
 
-function mostrar_pagina(flag)
-{
-	if (flag)
-	{
-		$("#errores").hide();
-		$("#todo_bien").show();
-	}
-	else
-	{
-		$("#errores").show();
-		$("#todo_bien").hide();
-	}
-}
+
 
 //Funcion para poder verificar si alumno existe en la base de datos
 function verificar (txt_dni, id_curso,momento ) {

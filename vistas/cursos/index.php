@@ -284,7 +284,8 @@ require '../header.php';
                               <div class="form-group">
                                 <p for="nombre_curso" class="col-md-4 col-sm-12 col-xs-12 control-label">Fecha de inicio :</p>
                                 <div class="col-md-8 col-sm-12 col-xs-12">
-                                  <input type="date" class="form-control" name="fecha_inicio_enlace" id="fecha_inicio_enlace" required>
+                                  <!-- <input type="date" class="form-control" name="fecha_inicio_enlace" id="fecha_inicio_enlace" required> -->
+                                  <input type="datetime-local" id="fecha_inicio_enlace"   name="fecha_inicio_enlace" required>
                                   <input type="hidden" class="form-control" name="id_enlace_curso" id="id_enlace_curso" >
                                   <input type="hidden" class="form-control" name="id_curso_enlace" id="id_curso_enlace" >
                                 </div>
@@ -294,11 +295,13 @@ require '../header.php';
                               <div class="form-group">
                                 <p for="nombre_curso" class="col-sm-4 control-label">Hora de inicio:</p>
                                 <div class="col-sm-8">
-                                  <input type="time" class="form-control" name="hora_inicio_enlace" id="hora_inicio_enlace" required>
+                                  <!-- <input type="time" class="form-control" name="hora_inicio_enlace" id="hora_inicio_enlace" required> -->
+                                  <input type="datetime-local" id="hora_inicio_enlace"   name="hora_inicio_enlace" required>
+
                                 </div>
                               </div>
                             </div>
-                            <div class="col-lg-12 col-md-12  col-sm-12 col-xs-12">
+                            <!-- <div class="col-lg-12 col-md-12  col-sm-12 col-xs-12">
                               <div class="form-group">
                                 <p for="nombre_curso" class="col-sm-5 control-label text-left" align="left">Duracion en minutos : </p>
                                 <div class="col-sm-7">
@@ -310,7 +313,7 @@ require '../header.php';
                                   </select>
                                 </div>
                               </div>
-                            </div>
+                            </div> -->
                             <div class="col-lg-12 col-md-12  col-sm-12 col-xs-12 text-center">
                             <button type="submit" class="btn btn-primary waves-effect"  id="btnGuardarEnlace"><i class="fa fa-link "></i> GENERAR ENLACE </button>  
                           </div>

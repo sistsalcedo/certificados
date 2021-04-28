@@ -134,7 +134,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> Toos 
     <script src="../../public/datatables/pdfmake.min.js"></script>
     <script src="../../public/datatables/vfs_fonts.js"></script> 
 
-     <script src="js/simplyCountdown.min.js"></script> 
+    <!--  <script src="js/simplyCountdown.min.js"></script>  -->
      
 
     
