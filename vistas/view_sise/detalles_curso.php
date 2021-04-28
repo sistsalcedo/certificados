@@ -100,7 +100,7 @@ $idcurso = $_GET['id'];
                                 <label>DNI:</label> 
                                 <input type="tel" class="form-control" name="txt_dni" id="txt_dni"  placeholder="Documento de Identidad" maxlength="8" required >
                                 <input type="hidden" name="id_curso" id="id_curso" >
-                                <input type="hidden" id="flag" name="flag" value="0">
+                           <!--      <input type="hidden" id="flag" name="flag" value="0"> -->
                               </div>
                               <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-6"> 
                                 <label>-</label>  
@@ -111,17 +111,9 @@ $idcurso = $_GET['id'];
                               <div class="form-group col-lg-6col-md-6 col-sm-12 col-xs-12" >
                                 <label>Apellidos y Nombres:</label> 
                                 <div id="div_apenom">
-                                  <input type="text" class="form-control" name="txt_apenom" id="txt_apenom"  placeholder="" readonly >
+                                  <input type="text" class="form-control" name="txt_apenom" id="txt_apenom"  placeholder="" readonly required>
                                 </div>
-                              </div>
-                              <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <label>Celular:</label> 
-                                <input type="text" class="form-control" name="txt_celular" id="txt_celular"  placeholder="Ejemplo: 965214569" required >
-                              </div>
-                              <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <label>Correo:</label>
-                                <input type="text" class="form-control" name="txt_email" id="txt_email" placeholder="Ejemplo: correo@dominio.com" required>
-                              </div>                             
+                              </div>                            
                               <br>
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" align="center">
                                   <button type="submit" class="genric-btn success circle"   id="btnGuardar" ><i class="fa fa-save"> </i> GUARDAR</button>                               

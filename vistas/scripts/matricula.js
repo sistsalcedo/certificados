@@ -6,7 +6,24 @@ function init(){
 	ocultarBtnLimpiar();
 	$("#fomrularioRegistro").on("submit",function(e)
 	{
-		guardaryeditar(e);	
+		e.preventDefault();
+		var id_curso = $('#id_curso').val();
+		var txt_dni = $('#txt_dni').val();
+		//var flag = $('#flag').val();
+		var txt_apenom = $('#txt_apenom').val();
+		
+
+		if (txt_apenom == '' ) {
+			Swal.fire({
+				  icon: 'error',
+				  title: 'Oops...',
+				  text: 'Debe ingresar su DNI y luego hacer click en el boton azul verificar.'
+				});
+		}else{
+			Ejecutar_consulta(id_curso , txt_dni, txt_apenom);	
+		}
+
+		
 	})
 
 }
@@ -82,34 +99,133 @@ function removerLoading()
 }
 
 
-//Función para guardar o editar
-function guardaryeditar(e)
-{
 
-	e.preventDefault(); //No se activará la acción predeterminada del evento
-	$("#btnGuardar").prop("disabled",true);
-	var formData = new FormData($("#fomrularioRegistro")[0]);
+function Ejecutar_consulta( id_curso , txt_dni, txt_apenom ){
+	
+	user(id_curso , txt_dni, txt_apenom);
 
-	$.ajax({
-		url: "../../ajax/matricula.php?op=guardaryeditar",
-	    type: "POST",
-	    data: formData,
-	    contentType: false,
-	    processData: false,
+}
 
-	    success: function(datos)
-	    {                    
-	          Swal.fire('Bien Hecho',datos,'success');	          
-	          limpiar();
-	          mostrarFormularioMatricula(false);
-	          $("#btnGuardar").prop("disabled",false);
-	    }
 
-	});
-	limpiar();
+
+
+function user(id_curso , txt_dni, txt_apenom) {
 
 	
+	$.post("../../ajax/matricula.php?op=existe_user",{txt_dni : txt_dni}, function(data, status)
+	{
+		
+		
+		if (data != 'null') {
+			
+			
+			ip_matricula_si_e(id_curso, txt_dni, txt_apenom);
+			
+
+		} else {
+
+			ip_matricula_no_e(id_curso, txt_dni, txt_apenom);
+
+		} 		
+ 	});
+
 }
+
+
+function se_matriculo( id_curso , txt_dni, txt_apenom ){
+
+	$.post("../../ajax/matricula.php?op=si_se_matriculo",{id_curso : id_curso, txt_dni : txt_dni}, function(data, status)
+	{
+		
+
+		if (data != 'null') {
+
+			Swal.fire('Aviso','Usted ya esta matriuclado en este curso.','success');
+
+		} else {
+
+			matricular( id_curso , txt_dni, txt_apenom)
+
+		}			
+ 	})
+}
+
+
+function matricular( id_curso , txt_dni, txt_apenom){
+
+	$.post("../../ajax/matricula.php?op=matricular",{id_curso : id_curso, txt_dni : txt_dni , txt_apenom : txt_apenom}, function(data, status)
+	{
+		//console.log(data);
+
+		Swal.fire('Aviso', data );	
+ 		
+ 	})
+}
+
+
+function ip_matricula_si_e(id_curso, txt_dni, txt_apenom){
+
+
+	$.post("../../ajax/matricula.php?op=ip_matricula",{id_curso : id_curso, txt_dni : txt_dni}, function(data, status)
+	{
+		
+		if (data != null) {
+
+			console.log('llego');
+			Swal.fire({
+				  icon: 'error',
+				  title: 'Oops...',
+				  text: 'No te puedes inscribir al curso 2 veces ó no puede inscribir a otras personas al mismo curso, desde este  mismo equipo.'
+				});
+
+		} else {
+			console.log('llego tbn');
+			se_matriculo( id_curso , txt_dni, txt_apenom );
+
+		}	 		
+ 	})
+}
+
+function ip_matricula_no_e(id_curso, txt_dni, txt_apenom){
+
+
+	$.post("../../ajax/matricula.php?op=ip_matricula",{id_curso : id_curso, txt_dni : txt_dni}, function(data, status)
+	{
+		
+		if (data != null) {
+
+			console.log('llego');
+			Swal.fire({
+				  icon: 'error',
+				  title: 'Oops...',
+				  text: 'No puede inscribir a otras personas al mismo curso desde este equipo.'
+				});
+
+		} else {
+			console.log('llego tbn');
+			crear_usuario_matricular( id_curso, txt_dni, txt_apenom );
+
+		}	 		
+ 	})
+}
+
+
+function crear_usuario_matricular( id_curso, txt_dni, txt_apenom ){
+
+
+	$.post("../../ajax/matricula.php?op=crear_usuario_matricular",{id_curso : id_curso, txt_dni : txt_dni , txt_apenom : txt_apenom}, function(data, status)
+	{
+		//console.log(data);
+
+		Swal.fire('Aviso', data );	
+ 		
+ 	})
+
+}
+
+
+
+
 
 function verificar_dni(){
 

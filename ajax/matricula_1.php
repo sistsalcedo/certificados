@@ -9,12 +9,12 @@ $txt_apenom=isset($_POST["txt_apenom"])? limpiarCadena($_POST["txt_apenom"]):"";
 $txt_celular=isset($_POST["txt_celular"])? limpiarCadena($_POST["txt_celular"]):"";
 $txt_email=isset($_POST["txt_email"])? limpiarCadena($_POST["txt_email"]):"";
 $id_curso=isset($_POST["id_curso"])? limpiarCadena($_POST["id_curso"]):"";
-//$flag=isset($_POST["flag"])? limpiarCadena($_POST["flag"]):"";
+$flag=isset($_POST["flag"])? limpiarCadena($_POST["flag"]):"";
 
 switch ($_GET["op"]){
 	case 'guardaryeditar':		
 	
-			$rspta=$matricula->insertar($txt_dni,$txt_apenom,$txt_email,$txt_celular,$id_curso);
+			$rspta=$matricula->insertar($txt_dni,$txt_apenom,$txt_email,$txt_celular,$id_curso, $flag);
 			echo $rspta ? "Usted se registró satisfactoriamente" : "No se Puede registrar. Intentelo denuevo";
 		
 	break;
@@ -33,36 +33,6 @@ switch ($_GET["op"]){
 		$rspta=$matricula->mostrar($idemployee);
  		//Codificar el resultado utilizando json
  		echo json_encode($rspta);
-	break;
-
-	case 'existe_user':
-		$rspta=$matricula->user($txt_dni);
- 		//Codificar el resultado utilizando json
- 		echo json_encode($rspta);
-	break;
-
-	case 'si_se_matriculo':
-		$rspta=$matricula->si_se_matriculo($id_curso, $txt_dni );
- 		//Codificar el resultado utilizando json
- 		echo json_encode($rspta);
-	break;
-
-	case 'matricular':
-		$rspta=$matricula->matricular($id_curso, $txt_dni , $txt_apenom);
- 		//Codificar el resultado utilizando json
- 		echo $rspta ? "Usted se registró correctamente al curso " : "No se Puede registrar. Intentelo denuevo";
-	break;
-
-	case 'ip_matricula':
-		$rspta=$matricula->ip_matricula($id_curso, $txt_dni );
- 		//Codificar el resultado utilizando json
- 		echo json_encode($rspta);
-	break;
-
-	case 'crear_usuario_matricular':
-		$rspta=$matricula->crear_usuario_matricular($id_curso, $txt_dni , $txt_apenom);
- 		//Codificar el resultado utilizando json
- 		echo $rspta ? "Usted se registró correctamente al curso " : "No se Puede registrar. Intentelo denuevo";
 	break;
 
 	case 'mostrarcondni':
