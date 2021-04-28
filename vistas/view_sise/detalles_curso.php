@@ -15,7 +15,7 @@ $idcurso = $_GET['id'];
              <div class="row">
                  <div class="col-xl-6">
                      <div class="course_text">
-                            <h3 id="nombre_curso"></h3>
+                            <h2 class="text-white" id="nombre_curso"></h2>
                            
                             <div class="rating">
                                 <i class="flaticon-mark-as-favorite-star"></i>

@@ -35,8 +35,8 @@ function limpiar()
 		
 	$("#txt_dni").val("");
 	$("#txt_apenom").val("");	
-	$("#txt_celular").val("");	
-	$("#txt_email").val("");
+	//$("#txt_celular").val("");	
+	//$("#txt_email").val("");
 	$('#txt_dni').prop("readonly",false);
 			
 
@@ -141,6 +141,10 @@ function se_matriculo( id_curso , txt_dni, txt_apenom ){
 		if (data != 'null') {
 
 			Swal.fire('Aviso','Usted ya esta matriuclado en este curso.','success');
+			limpiar();
+			ocultarBtnLimpiar();
+			mostrarFormularioMatricula(false);
+
 
 		} else {
 
@@ -157,7 +161,10 @@ function matricular( id_curso , txt_dni, txt_apenom){
 	{
 		//console.log(data);
 
-		Swal.fire('Aviso', data );	
+		Swal.fire('Aviso', data );
+		limpiar();	
+		ocultarBtnLimpiar();
+		mostrarFormularioMatricula(false);
  		
  	})
 }
@@ -169,7 +176,7 @@ function ip_matricula_si_e(id_curso, txt_dni, txt_apenom){
 	$.post("../../ajax/matricula.php?op=ip_matricula",{id_curso : id_curso, txt_dni : txt_dni}, function(data, status)
 	{
 		
-		if (data != null) {
+		if (data != 'null') {
 
 			console.log('llego');
 			Swal.fire({
@@ -177,6 +184,9 @@ function ip_matricula_si_e(id_curso, txt_dni, txt_apenom){
 				  title: 'Oops...',
 				  text: 'No te puedes inscribir al curso 2 veces ó no puede inscribir a otras personas al mismo curso, desde este  mismo equipo.'
 				});
+			limpiar();
+			ocultarBtnLimpiar();
+			mostrarFormularioMatricula(false);
 
 		} else {
 			console.log('llego tbn');
@@ -192,7 +202,7 @@ function ip_matricula_no_e(id_curso, txt_dni, txt_apenom){
 	$.post("../../ajax/matricula.php?op=ip_matricula",{id_curso : id_curso, txt_dni : txt_dni}, function(data, status)
 	{
 		
-		if (data != null) {
+		if (data != 'null') {
 
 			console.log('llego');
 			Swal.fire({
@@ -200,6 +210,9 @@ function ip_matricula_no_e(id_curso, txt_dni, txt_apenom){
 				  title: 'Oops...',
 				  text: 'No puede inscribir a otras personas al mismo curso desde este equipo.'
 				});
+			limpiar();
+			ocultarBtnLimpiar();
+			mostrarFormularioMatricula(false);
 
 		} else {
 			console.log('llego tbn');
@@ -217,14 +230,14 @@ function crear_usuario_matricular( id_curso, txt_dni, txt_apenom ){
 	{
 		//console.log(data);
 
-		Swal.fire('Aviso', data );	
+		Swal.fire('Aviso', data );
+		limpiar();	
+		ocultarBtnLimpiar();
+		mostrarFormularioMatricula(false);
  		
  	})
 
 }
-
-
-
 
 
 function verificar_dni(){
