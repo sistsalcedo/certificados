@@ -126,7 +126,7 @@ Class Asistencia
 		// $rs = ejecutarConsultaSimpleFila($sql1);
 		// $id_alumno = $rs['id_alumno'];
 
-		// $ipreal = $_SERVER['REMOTE_ADDR'];
+		$ipreal = $_SERVER['REMOTE_ADDR'];
 
 		$sql="	SELECT id_matricula, id_curso, id_alumno, fechainscripcion, detalles
 				FROM  matricula
@@ -135,7 +135,7 @@ Class Asistencia
 	}
 
 
-		public function matricular($id_curso , $txt_dni, $momento )
+		public function matricular($txt_dni, $id_curso, $momento)
 	{
 		
 		$sql1="SELECT id_alumno FROM alumnos WHERE dni='$txt_dni'";
@@ -287,7 +287,7 @@ Class Asistencia
  //$asistencia=new Asistencia();
 
 
-//$rspta=$asistencia->si_se_matriculo( 45862145, 27, 'inicio' );
+//$rspta=$asistencia->matricular($id_curso , $txt_dni, $momento );
 //$rspta=$asistencia->si_user_existe(45862145);
  		
 //var_dump($rspta);

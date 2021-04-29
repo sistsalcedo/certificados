@@ -94,9 +94,9 @@ switch ($_GET["op"]){
 	break;
 
 	case 'matricular':
-		$rspta=$asistencia->matricular($id_curso , $txt_dni, $momento );
+		$rspta=$asistencia->matricular($txt_dni, $id_curso, $momento );
  		//Codificar el resultado utilizando json
- 		echo $rspta ? "Correcto " : "No se pudo marcar asistencia. Intentelo denuevo";
+ 		echo $rspta ? "Se matriculo correctamente " : "No se pudo marcar asistencia. Intentelo denuevo";
 	break;
 
 	case 'crearuser_matricular_asistencia':

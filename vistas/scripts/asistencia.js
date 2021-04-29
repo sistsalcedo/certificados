@@ -186,7 +186,7 @@ function si_user_existe( txt_dni, id_curso, momento) {
 
 
 
-function ip_matricula_si_e( txt_dni, id_curso, momento){
+function ip_matricula_si_e( id_curso , txt_dni, momento){
 
 
 	$.post("../../ajax/asistencia.php?op=ip_matricula",{id_curso : id_curso}, function(data, status)
@@ -208,7 +208,7 @@ function ip_matricula_si_e( txt_dni, id_curso, momento){
 			console.log('llego tbn');
 			
 
-			matricular(id_curso , txt_dni, momento);
+			matricular(txt_dni, id_curso, momento);
 
 		}	 		
  	})
@@ -242,9 +242,9 @@ function ip_matricula_no_e(id_curso , txt_dni, momento){
 }
 
 
-function matricular(id_curso , txt_dni, momento){
+function matricular(txt_dni, id_curso, momento){
 
-	$.post("../../ajax/asistencia.php?op=matricular",{id_curso : id_curso, txt_dni : txt_dni, momento : momento  }, function(data, status)
+	$.post("../../ajax/asistencia.php?op=matricular",{txt_dni : txt_dni, id_curso : id_curso, momento : momento  }, function(data, status)
 	{
 		//console.log(data);
 
