@@ -58,14 +58,14 @@ $idcurso = $_GET['id'];
                         <div class="video_thumb">
                             <img id="imagen_curso" src="img/latest_blog/video.png" alt="">
                         </div>
-                        <div class="author_info">
+                        <div class="author_info bg-white">
                             <div class="auhor_header">
                                 <!-- <div class="thumb">
                                         <img src="img/latest_blog/author.png" alt="">
                                 </div> -->
                                 <div class="name">
-                                    <h3 id="nombre_ponente">Macau Wilium</h3>
-                                    <p>Juez Superior</p>
+                                    <h3 id="nombre_ponente"></h3>
+                                    <p>Juez Supremo (T)</p>
                                 </div>
                             </div>
                         </div>
@@ -115,7 +115,7 @@ $idcurso = $_GET['id'];
                                 </div>
                               </div>                            
                               <br>
-                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" align="center">
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" align="center" id="btn_para_q_se_registren" name= "btn_para_q_se_registren">
                                   <button type="submit" class="genric-btn success circle"   id="btnGuardar" ><i class="fa fa-save"> </i> GUARDAR</button>                               
                                   <button type="button" class="genric-btn danger circle"  onclick="cancelarform()"><i class="fa fa-arrow-left fa-3"></i> </i>Cancelar</button>
                                 </div>
@@ -144,13 +144,12 @@ $idcurso = $_GET['id'];
                                     <img src="img/testmonial/author_img.png" alt="">
                                 </div>
                                 <p>
-                                    "Working in conjunction with humanitarian aid <br> agencies we have supported
-                                    programmes to <br>
-                                    alleviate.
-                                    human suffering.
+                                    La mente es como un paracaídas:  <br>
+                                    sólo funciona si se abre.
+                                    
 
                                 </p>
-                                <span>- Jquileen</span>
+                                <span>- Albert Einstein.</span>
                             </div>
                         </div>
                     </div>
@@ -165,13 +164,10 @@ $idcurso = $_GET['id'];
                                     <img src="img/testmonial/author_img.png" alt="">
                                 </div>
                                 <p>
-                                    "Working in conjunction with humanitarian aid <br> agencies we have supported
-                                    programmes to <br>
-                                    alleviate.
-                                    human suffering.
+                                    Cualquiera que para de aprender se hace viejo, tanto si tiene 20 como 80 años.<br> Cualquiera que sigue aprendiendo permanece joven. Esta es la grandeza de la vida. <br>
 
                                 </p>
-                                <span>- Jquileen</span>
+                                <span>-  Henry Ford</span>
                             </div>
                         </div>
                     </div>

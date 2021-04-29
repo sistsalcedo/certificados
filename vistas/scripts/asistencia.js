@@ -15,7 +15,8 @@ function init(){
 
  		console.log(id_curso+' '+txt_dni +' '+momento);
 
-  	 	si_se_matriculo( txt_dni, id_curso, momento );
+  	 	si_marco_asistencia(  txt_dni, id_curso, momento );
+  	 	//si_se_matriculo( txt_dni, id_curso, momento );
 
 	})
 
@@ -102,6 +103,34 @@ function si_enlace_vigente(id_curso, cadena )
 }
 
 
+
+function si_marco_asistencia(  txt_dni, id_curso, momento ){
+
+
+	$.post("../../ajax/asistencia.php?op=si_marco_asistencia",{txt_dni : txt_dni, id_curso:id_curso, momento:momento }, function(data, status)
+	{
+		
+		if (data != 'null') {
+
+			console.log('Ya marco su asistencia');
+			Swal.fire({
+				  icon: 'error',
+				  title: 'Oops...',
+				  text: 'Usted ya marcó su asistencia.'
+				});
+
+		} else {
+
+			si_se_matriculo( txt_dni, id_curso, momento );
+
+		}	 		
+ 	})
+
+
+}
+
+
+
 function si_se_matriculo( txt_dni, id_curso, momento )
 {
 	
@@ -138,7 +167,7 @@ function si_se_matriculo( txt_dni, id_curso, momento )
 
 function ip_matriculado_existe(txt_dni, id_curso, momento){
 
-	$.post("../../ajax/asistencia.php?op=ip_matricula",{id_curso : id_curso}, function(data, status)
+	$.post("../../ajax/asistencia.php?op=ip_asistencia",{id_curso : id_curso, txt_dni:txt_dni, momento:momento }, function(data, status)
 	{
 		
 		if (data != 'null') {

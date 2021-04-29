@@ -77,6 +77,44 @@ Class Asistencia
 	}
 
 
+
+		// Buscar biscar si el usuario existe en la base de datos
+	public function si_marco_asistencia($txt_dni, $id_curso, $momento)
+	{
+		
+
+		$sql1="SELECT id_alumno FROM alumnos WHERE dni='$txt_dni'";
+		$rs = ejecutarConsultaSimpleFila($sql1);
+		$id_alumno = $rs['id_alumno'];
+
+		if ( is_null($id_alumno)){
+			$id_alumno = '99999999';
+			//echo "LLego aqui";
+
+			$sql="SELECT * FROM asistenciacursos WHERE id_curso = '$id_curso' AND id_alumno = '$id_alumno' AND fecha_ingreso IS NOT NULL  ";
+			return ejecutarConsultaSimpleFila($sql);
+
+		}elseif ($momento == 'inicio') {
+
+			$sql="SELECT * FROM asistenciacursos WHERE id_curso = '$id_curso' AND id_alumno = '$id_alumno' AND fecha_ingreso IS NOT NULL  ";
+			return ejecutarConsultaSimpleFila($sql);
+
+		}elseif ($momento == 'medio') {
+			
+			$sql="SELECT * FROM asistenciacursos WHERE id_curso = '$id_curso' AND id_alumno = '$id_alumno' AND fecha_intermedia IS NOT NULL  ";
+			return ejecutarConsultaSimpleFila($sql);
+
+		}else{
+
+			$sql="SELECT * FROM asistenciacursos WHERE id_curso = '$id_curso' AND id_alumno = '$id_alumno' AND fecha_salida IS NOT NULL  ";
+			return ejecutarConsultaSimpleFila($sql);
+
+		}
+
+	}
+
+
+
 	//Implementar un método para mostrar los datos de un registro a modificar
 	public function si_se_matriculo( $txt_dni, $id_curso, $momento)
 	{
@@ -135,7 +173,35 @@ Class Asistencia
 	}
 
 
-		public function matricular($txt_dni, $id_curso, $momento)
+	//Verificar si la ip de la maquina son iguales q la actual
+	public function ip_asistencia($id_curso, $txt_dni, $momento )
+	{	
+		
+
+		$ipreal = $_SERVER['REMOTE_ADDR'];
+
+		
+		if ($momento == 'inicio') {
+
+			$sql="SELECT * FROM asistenciacursos WHERE id_curso = '$id_curso' AND ip_asistencia = '$ipreal' AND fecha_ingreso IS NOT NULL  ";
+			return ejecutarConsultaSimpleFila($sql);
+
+		}elseif ($momento == 'medio') {
+			
+			$sql="SELECT * FROM asistenciacursos WHERE id_curso = '$id_curso' AND ip_asistencia = '$ipreal' AND fecha_intermedia IS NOT NULL  ";
+			return ejecutarConsultaSimpleFila($sql);
+
+		}else{
+
+			$sql="SELECT * FROM asistenciacursos WHERE id_curso = '$id_curso' AND ip_asistencia = '$ipreal' AND fecha_salida IS NOT NULL  ";
+			return ejecutarConsultaSimpleFila($sql);
+
+		}
+	}
+
+
+
+	public function matricular($txt_dni, $id_curso, $momento)
 	{
 		
 		$sql1="SELECT id_alumno FROM alumnos WHERE dni='$txt_dni'";
@@ -284,10 +350,10 @@ Class Asistencia
 
 }
 
- //$asistencia=new Asistencia();
+// $asistencia=new Asistencia();
 
 
-//$rspta=$asistencia->matricular($id_curso , $txt_dni, $momento );
+//$rspta=$asistencia->si_se_matriculo( 77909110 , 27, 'inicio');
 //$rspta=$asistencia->si_user_existe(45862145);
  		
 //var_dump($rspta);

@@ -8,77 +8,35 @@
                         <div class="footer_widget">
                             <div class="footer_logo">
                                 <a href="#">
-                                    <img src="img/logo.png" alt="">
+                                    <img src="img/logo_1.png" alt="">
                                 </a>
                             </div>
                             <p>
-                                Sistema de Eventos, cursos y capacitaciones implementado por la Unidad de Infromatica de la Corte Superior de Justicia de Huanuco.
+                                Sistema de capacitaciones implementado por la Unidad de Informatica de la Corte Superior de Justicia de Huanuco.
                             </p>
-                            <div class="socail_links">
-                                <ul>
-                                    <li>
-                                        <a href="#">
-                                            <i class="ti-facebook"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="ti-twitter-alt"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-instagram"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-youtube-play"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
 
                         </div>
                     </div>
-                    <div class="col-xl-2 offset-xl-1 col-md-6 col-lg-3">
+                    <div class="col-xl-4 col-md-6 col-lg-2">
                         <div class="footer_widget">
                             <h3 class="footer_title">
-                                Courses
+                                Enlaces
                             </h3>
                             <ul>
-                                <li><a href="#">Wordpress</a></li>
-                                <li><a href="#"> Photoshop</a></li>
-                                <li><a href="#">Illustrator</a></li>
-                                <li><a href="#">Adobe XD</a></li>
-                                <li><a href="#">UI/UX</a></li>
-                            </ul>
-
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-6 col-lg-2">
-                        <div class="footer_widget">
-                            <h3 class="footer_title">
-                                Resourches
-                            </h3>
-                            <ul>
-                                <li><a href="#">Free Adobe XD</a></li>
-                                <li><a href="#">Tutorials</a></li>
-                                <li><a href="#">About</a></li>
-                                <li><a href="#"> About</a></li>
-                                <li><a href="#"> Contact</a></li>
+                                <li><a href="http://csjhuanuco.com/">Poder Judicial HUanuco</a></li>
+                                <li><a href="http://sisec.csjhuanuco.com/vistas/view_sise/search_certificado.php">Descarga certificados</a></li>
+                                <li><a href="http://sisec.csjhuanuco.com/vistas/view_sise/index.php">Cursos</a></li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-md-6 col-lg-3">
+                    <div class="col-xl-4 col-md-6 col-lg-3">
                         <div class="footer_widget">
                             <h3 class="footer_title">
-                                Address
+                                Dirección
                             </h3>
                             <p>
-                                200, D-block, Green lane USA <br>
-                                +10 367 467 8934 <br>
-                                edumark@contact.com
+                                Jiron Dos de Mayo <br>
+                               N° 11 <br>
                             </p>
                         </div>
                     </div>

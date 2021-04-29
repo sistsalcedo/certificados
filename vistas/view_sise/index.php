@@ -16,10 +16,10 @@ require "header.php";
                         </div>
                     </div>
                     <div class="col-xl-7 col-md-7">
-                        <div class="slider_info">
-                            <h3>Siempre se trata de <br>
-                                <small>aprender algo y de pensar que puedes mejorar. </small>
-                                </h3>
+                        <div class="slider_info ">
+                            <h1 class="text-white">SICAP <br>Sistema de Capacitaciones <br>
+                                <small>del <br> Poder Judicial de Huanuco. </small>
+                                </h1>
                             <a href="#popular_courses" class="boxed_btn"><i class="fa fa-chevron-down"></i></a>
                         </div>
                     </div>

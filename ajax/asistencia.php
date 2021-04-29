@@ -75,6 +75,12 @@ switch ($_GET["op"]){
  		echo json_encode($rspta);
 	break;
 
+	case 'si_marco_asistencia':
+		$rspta=$asistencia->si_marco_asistencia($txt_dni, $id_curso, $momento);
+ 		//Codificar el resultado utilizando json
+ 		echo json_encode($rspta);
+	break;
+
 	case 'si_se_matriculo':
 		$rspta=$asistencia->si_se_matriculo( $txt_dni, $id_curso, $momento );
  		echo json_encode($rspta);
@@ -93,10 +99,16 @@ switch ($_GET["op"]){
  		echo json_encode($rspta);
 	break;
 
+	case 'ip_asistencia':
+		$rspta=$asistencia->ip_asistencia( $id_curso, $txt_dni, $momento );
+ 		//Codificar el resultado utilizando json
+ 		echo json_encode($rspta);
+	break;
+
 	case 'matricular':
 		$rspta=$asistencia->matricular($txt_dni, $id_curso, $momento );
  		//Codificar el resultado utilizando json
- 		echo $rspta ? "Se matriculo correctamente " : "No se pudo marcar asistencia. Intentelo denuevo";
+ 		echo $rspta ? "USted marco su asistencia correctamente. " : "No se pudo marcar asistencia. Intentelo denuevo";
 	break;
 
 	case 'crearuser_matricular_asistencia':

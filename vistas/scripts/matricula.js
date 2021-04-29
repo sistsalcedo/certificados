@@ -3,6 +3,7 @@
 //Función que se ejecuta al inicio
 function init(){
 	mostrarFormularioMatricula(false);
+	btn_para_q_se_registren(false);
 	ocultarBtnLimpiar();
 	$("#fomrularioRegistro").on("submit",function(e)
 	{
@@ -47,6 +48,7 @@ function limpiar_txt_dni(){
 	
 	//$("#btnVerificar").show();
 	ocultarBtnLimpiar();
+	btn_para_q_se_registren(false);
 
 	limpiar();
 
@@ -62,6 +64,18 @@ function mostrarBtnLimpiar() {
 	
 	$("#btnVerificar").hide();
 	$("#limpiarDatos").show();
+}
+
+function btn_para_q_se_registren(flag){
+
+	if (flag)
+	{
+		$("#btn_para_q_se_registren").show(300);
+	}
+	else
+	{
+		$("#btn_para_q_se_registren").hide();
+	}
 }
 
 //Función mostrar formulario
@@ -264,6 +278,7 @@ function verificar_dni(){
 				  text: 'Ingresar un DNI válido.'
 				});
 				removerLoading();
+				btn_para_q_se_registren(false);
 		   		limpiar_txt_dni();
 
 			} else {
@@ -271,6 +286,7 @@ function verificar_dni(){
 				var apenom = data.apellidoPaterno+" "+data.apellidoMaterno+" "+data.nombres;
 
 				removerLoading();
+				btn_para_q_se_registren(true);
 				$('#txt_apenom').val(apenom);
 				$('#txt_dni').prop("readonly",true);
 			}				
