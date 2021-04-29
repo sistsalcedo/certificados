@@ -8,18 +8,18 @@ function init(){
 	$("#fomrularioRegistroAsistencia").on("submit",function(e)
 	{
 		
-		// e.preventDefault();
-		// var txt_dni = $('#txt_dni').val();
-  //   	var id_curso = $('#id_curso').val();
-  //   	var momento = $('#momento').val();
+		e.preventDefault();
+		var txt_dni = $('#txt_dni').val();
+  		var id_curso = $('#id_curso').val();
+     	var momento = $('#momento').val();
 
-  //   	verificar( txt_dni, id_curso, momento );
+ 		console.log(id_curso+' '+txt_dni +' '+momento);
+
+  	 	si_se_matriculo( txt_dni, id_curso, momento );
+
 	})
 
-	$("#fomrularioRegistro").on("submit",function(e)
-	{
-		guardaryeditar(e);	
-	})
+
 
 
 }
@@ -40,7 +40,7 @@ function mostrar_pagina(flag)
 
 function validar_url(id_curso, cadena, momento )
 {
-		$.post("../../ajax/asistencia.php?op=validar_url",{id_curso : id_curso, cadena : cadena}, function(data, status)
+		$.post("../../ajax/asistencia.php?op=validar_url",{id_curso : id_curso, cadena : cadena,  momento : momento}, function(data, status)
 	{
 		
 		console.log(data);
@@ -102,6 +102,219 @@ function si_enlace_vigente(id_curso, cadena )
 }
 
 
+function si_se_matriculo( txt_dni, id_curso, momento )
+{
+	
+	$.post("../../ajax/asistencia.php?op=si_se_matriculo",{txt_dni : txt_dni , id_curso : id_curso, momento : momento}, function(data, status)
+	{
+		
+		if (data != 'null') {			
+
+			ip_matriculado_existe(txt_dni, id_curso, momento);
+
+			console.log('Si se matriculo');
+			
+
+		} else if(momento = 'inicio') {
+
+				console.log('llego aqui');
+				si_user_existe( txt_dni, id_curso, momento);
+			
+		}else{
+			console.log('llego aqui tbn');
+				swal.fire({
+	             icon: 'error',
+	  				title: 'Oops...',
+	  				text: 'Ya no puede marcar su asistencia, porque no se encuentra matriculado. La MATRICULA se realiza al comienzo del curso'
+		        });
+		        mostrar_pagina(false);
+		}			
+ 	})
+
+
+
+}
+
+
+function ip_matriculado_existe(txt_dni, id_curso, momento){
+
+	$.post("../../ajax/asistencia.php?op=ip_matricula",{id_curso : id_curso}, function(data, status)
+	{
+		
+		if (data != 'null') {
+
+			console.log('llego');
+			Swal.fire({
+				  icon: 'error',
+				  title: 'Oops...',
+				  text: 'No se puede marcar la asistencia de otra persona desde este mismo equipo.'
+				});
+			//limpiar();
+			//ocultarBtnLimpiar();
+			//mostrarFormularioMatricula(false);
+
+		} else {
+
+			marcar_asistencia( txt_dni, id_curso, momento);
+
+		}	 		
+ 	})
+
+}
+
+
+
+function si_user_existe( txt_dni, id_curso, momento) {
+
+	
+	$.post("../../ajax/asistencia.php?op=si_user_existe",{txt_dni : txt_dni}, function(data, status)
+	{
+		
+		
+		if (data != 'null') {
+			
+			ip_matricula_si_e(id_curso , txt_dni, momento);
+			
+		} else {
+
+
+			ip_matricula_no_e(id_curso , txt_dni, momento);
+		} 		
+ 	});
+
+}
+
+
+
+function ip_matricula_si_e( txt_dni, id_curso, momento){
+
+
+	$.post("../../ajax/asistencia.php?op=ip_matricula",{id_curso : id_curso}, function(data, status)
+	{
+		
+		if (data != 'null') {
+
+			console.log('llego');
+			Swal.fire({
+				  icon: 'error',
+				  title: 'Oops...',
+				  text: 'No se puede inscribir a otras personas al mismo curso, desde este  mismo equipo.'
+				});
+			//limpiar();
+			//ocultarBtnLimpiar();
+			//mostrarFormularioMatricula(false);
+
+		} else {
+			console.log('llego tbn');
+			
+
+			matricular(id_curso , txt_dni, momento);
+
+		}	 		
+ 	})
+}
+
+function ip_matricula_no_e(id_curso , txt_dni, momento){
+
+
+	$.post("../../ajax/asistencia.php?op=ip_matricula",{id_curso : id_curso}, function(data, status)
+	{
+		
+		if (data != 'null') {
+
+			console.log('llego');
+			Swal.fire({
+				  icon: 'error',
+				  title: 'Oops...',
+				  text: 'No puede inscribir a otras personas al mismo curso desde este equipo.'
+				});
+			//limpiar();
+			//ocultarBtnLimpiar();
+			//mostrarFormularioMatricula(false);
+
+		} else {
+			console.log('llego tbn');
+			verificar_si_dni_valido(id_curso , txt_dni , momento);
+			//crear_usuario_matricular_asistencia( id_curso, txt_dni, txt_apenom );
+
+		}	 		
+ 	})
+}
+
+
+function matricular(id_curso , txt_dni, momento){
+
+	$.post("../../ajax/asistencia.php?op=matricular",{id_curso : id_curso, txt_dni : txt_dni, momento : momento  }, function(data, status)
+	{
+		//console.log(data);
+
+		Swal.fire('Aviso', data );
+		//limpiar();	
+		//ocultarBtnLimpiar();
+		//mostrarFormularioMatricula(false);
+ 		
+ 	})
+
+}
+
+
+function verificar_si_dni_valido(id_curso , txt_dni , momento){
+
+
+	var url = 'https://dniruc.apisperu.com/api/v1/dni/'+txt_dni+'?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InNpc3RzYWxjZWRvQGdtYWlsLmNvbSJ9.P1giLK514zJDIcEE3nRZ6e7rpTdraowBBf2GbakxHJ8';
+	
+	var data = $.getJSON(url, function(data){
+
+		if ( data.success == false ) {
+
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: 'Ingresar un DNI válido.'
+			});
+			//limpiar();	
+
+		} else {
+
+			var apenom = data.apellidoPaterno+" "+data.apellidoMaterno+" "+data.nombres;
+			crearuser_matricular_asistencia(id_curso , txt_dni, apenom);
+		}				
+	});
+	
+
+}
+
+
+function crearuser_matricular_asistencia(id_curso , txt_dni, apenom) {
+
+	$.post("../../ajax/asistencia.php?op=crearuser_matricular_asistencia",{id_curso : id_curso, txt_dni : txt_dni, apenom : apenom  }, function(data, status)
+	{
+		//console.log(data);
+
+		Swal.fire('Aviso', data );
+		//limpiar();	
+		//ocultarBtnLimpiar();
+		//mostrarFormularioMatricula(false);
+ 		
+ 	})
+
+}
+
+
+function marcar_asistencia( txt_dni, id_curso, momento){
+
+	$.post("../../ajax/asistencia.php?op=marcar_asistencia",{id_curso : id_curso, txt_dni : txt_dni,  momento : momento  }, function(data, status)
+	{
+		//console.log(data);
+
+		Swal.fire('Aviso', data );
+		//limpiar();	
+		//ocultarBtnLimpiar();
+		//mostrarFormularioMatricula(false);
+ 		
+ 	})
+
+}
 
 
 
@@ -112,6 +325,8 @@ function si_enlace_vigente(id_curso, cadena )
 function limpiar()
 {
 	$("#txt_dni").val("");
+	$("#id_curso").val("");
+	$("#momento").val("");
 	
 
 }
@@ -119,7 +334,7 @@ function limpiar()
 //Función mostrar formulario
 function mostrardiv(flag)
 {
-	limpiar();
+	//limpiar();
 	if (flag)
 	{
 		$("#div_asistencia").hide();
@@ -137,24 +352,24 @@ function mostrardiv(flag)
 //Función cancelarform
 function cancelarform()
 {
-	limpiar();
+	//limpiar();
 	mostrardiv(false);
 }
 
 
-function mostrar_pagina(flag)
-{
-	if (flag)
-	{
-		$("#errores").hide();
-		$("#todo_bien").show();
-	}
-	else
-	{
-		$("#errores").show();
-		$("#todo_bien").hide();
-	}
-}
+// function mostrar_pagina(flag)
+// {
+// 	if (flag)
+// 	{
+// 		$("#errores").hide();
+// 		$("#todo_bien").show();
+// 	}
+// 	else
+// 	{
+// 		$("#errores").show();
+// 		$("#todo_bien").hide();
+// 	}
+// }
 
 //Funcion para poder verificar si alumno existe en la base de datos
 function verificar (txt_dni, id_curso,momento ) {
@@ -177,7 +392,7 @@ function verificar (txt_dni, id_curso,momento ) {
 			//preguntarse_EXxistira_usuario(txt_dni, id_curso);
 			//mostrardiv(true);
 			//Swal.fire({ title:'Aviso', text: e, footer: '<a href>Tiene problemas para descargar su certificado?</a>' });
-	    	limpiar();
+	    	//limpiar();
 		}
  		
  	})
@@ -308,34 +523,6 @@ function removerLoading()
 
 
 
-//Función para guardar o editar
-function guardaryeditar(e)
-{
-
-	e.preventDefault(); //No se activará la acción predeterminada del evento
-	$("#btnRegistrar").prop("disabled",true);
-	var formData = new FormData($("#fomrularioRegistro")[0]);
-
-	$.ajax({
-		url: "../../ajax/asistencia.php?op=guardaryeditar",
-	    type: "POST",
-	    data: formData,
-	    contentType: false,
-	    processData: false,
-
-	    success: function(datos)
-	    {                    
-	          Swal.fire('Bien Hecho',datos,'success');	          
-	          limpiar();
-	          mostrardiv(false);
-	          $("#btnRegistrar").prop("disabled",false);
-	    }
-
-	});
-	limpiar();
-
-	
-}
 
 
 init();

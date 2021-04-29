@@ -54,12 +54,12 @@ Class Asistencia
 
 
 	//Implementar un método para mostrar los datos de un registro a modificar
-	public function validar_url($id_curso , $cadena)
+	public function validar_url($id_curso , $cadena, $momento)
 	{
 		
 		$sql="SELECT id_enlace_curso, cadena_aleatoria, enlace_url, enlaceQR_url, fechainicio_url, horainicio_url, duracion_min, momento_enlace_url, condicion_url, id_curso
 		   FROM enlaces_asistencia_curso
-		   WHERE id_curso =  '$id_curso'  AND cadena_aleatoria = '$cadena'";
+		   WHERE id_curso =  '$id_curso'  AND cadena_aleatoria = '$cadena' AND momento_enlace_url = '$momento'";
 		return ejecutarConsultaSimpleFila($sql);
 	}
 
@@ -75,6 +75,168 @@ Class Asistencia
 				WHERE id_curso =  '$id_curso'  AND cadena_aleatoria = '$cadena' AND horainicio_url > '$fecha_actual'";
 		return ejecutarConsultaSimpleFila($sql);
 	}
+
+
+	//Implementar un método para mostrar los datos de un registro a modificar
+	public function si_se_matriculo( $txt_dni, $id_curso, $momento)
+	{
+		$sql1="SELECT id_alumno FROM alumnos WHERE dni='$txt_dni'";
+		$rs = ejecutarConsultaSimpleFila($sql1);
+		$id_alumno = $rs['id_alumno'];
+		//var_dump($id_alumno);
+
+		if ( is_null($id_alumno)){
+			$id_alumno = '99999999';
+			//echo "LLego aqui";
+
+			$sql="SELECT id_matricula, id_curso, id_alumno, fechainscripcion, detalles
+				FROM matricula
+				WHERE id_curso = '$id_curso' AND id_alumno = '$id_alumno'  ";
+			return ejecutarConsultaSimpleFila($sql);
+
+		}else{
+
+
+			$sql="SELECT id_matricula, id_curso, id_alumno, fechainscripcion, detalles
+				FROM matricula
+				WHERE id_curso = '$id_curso' AND id_alumno = '$id_alumno'  ";
+			return ejecutarConsultaSimpleFila($sql);
+
+		}
+
+		
+	}
+
+
+		// Buscar biscar si el usuario existe en la base de datos
+	public function si_user_existe($txt_dni)
+	{
+		$sql="	SELECT id_alumno, dni, apenom, correo, celular, detalles
+				FROM farojeqn_bdpjhuanuco.alumnos
+				WHERE dni = '$txt_dni'";
+		return ejecutarConsultaSimpleFila($sql);
+	}
+
+
+
+	//Verificar si la ip de la maquina son iguales q la actual
+	public function ip_matricula($id_curso )
+	{	
+		// $sql1="SELECT id_alumno FROM alumnos WHERE dni='$txt_dni'";
+		// $rs = ejecutarConsultaSimpleFila($sql1);
+		// $id_alumno = $rs['id_alumno'];
+
+		// $ipreal = $_SERVER['REMOTE_ADDR'];
+
+		$sql="	SELECT id_matricula, id_curso, id_alumno, fechainscripcion, detalles
+				FROM  matricula
+				WHERE id_curso = '$id_curso' AND detalles = '$ipreal' ";
+		return ejecutarConsultaSimpleFila($sql);
+	}
+
+
+		public function matricular($id_curso , $txt_dni, $momento )
+	{
+		
+		$sql1="SELECT id_alumno FROM alumnos WHERE dni='$txt_dni'";
+		$rs = ejecutarConsultaSimpleFila($sql1);
+		$id_alumno = $rs['id_alumno'];
+
+		$ipreal = $_SERVER['REMOTE_ADDR'];
+
+		$sql="INSERT INTO matricula ( id_curso, id_alumno,  detalles)
+				VALUES ( '$id_curso' , '$id_alumno' , '$ipreal' ) ";
+		ejecutarConsulta($sql);
+
+		
+		if(  $momento == 'inicio'   ){
+
+			$sql2="INSERT INTO asistenciacursos (id_curso, id_alumno, fecha_ingreso) VALUES ( '$id_curso' , '$id_alumno', NOW() )";
+			return ejecutarConsulta($sql2);
+
+		}elseif( $momento == 'medio' ){
+
+			$sql2="UPDATE asistenciacursos
+					SET fecha_intermedia = NOW()   WHERE id_curso= '$id_curso' AND  id_alumno = '$id_alumno'  ";
+
+			return ejecutarConsulta($sql2);
+
+		}else {
+			$sql2="UPDATE asistenciacursos
+					SET	fecha_salida = NOW()   WHERE id_curso= '$id_curso' AND id_alumno = '$id_alumno'  ";
+			return ejecutarConsulta($sql2);
+		}
+
+		
+	}
+
+
+	public function crearuser_matricular_asistencia($id_curso , $txt_dni, $apenom )
+	{
+		
+		$sql1="INSERT INTO alumnos ( dni, apenom) VALUES ( '$id_curso', '$apenom')";
+		$$id_alumno = ejecutarConsulta_retornarID($sql1);
+
+		$ipreal = $_SERVER['REMOTE_ADDR'];
+
+		$sql="INSERT INTO matricula ( id_curso, id_alumno,  detalles)
+				VALUES ( '$id_curso' , '$id_alumno' , '$ipreal' ) ";
+		ejecutarConsulta($sql);
+
+		
+		if(  $momento == 'inicio'   ){
+
+			$sql2="INSERT INTO asistenciacursos (id_curso, id_alumno, fecha_ingreso) VALUES ( '$id_curso' , '$id_alumno', NOW() )";
+			return ejecutarConsulta($sql2);
+
+		}elseif( $momento == 'medio' ){
+
+			$sql2="UPDATE asistenciacursos
+					SET fecha_intermedia = NOW()   WHERE id_curso= '$id_curso' AND  id_alumno = '$id_alumno'  ";
+
+			return ejecutarConsulta($sql2);
+
+		}else {
+			$sql2="UPDATE asistenciacursos
+					SET	fecha_salida = NOW()   WHERE id_curso= '$id_curso' AND id_alumno = '$id_alumno'  ";
+			return ejecutarConsulta($sql2);
+		}
+
+		
+	}
+
+
+
+		public function marcar_asistencia($txt_dni, $id_curso, $momento)
+	{
+		
+		$sql1="SELECT id_alumno FROM alumnos WHERE dni='$txt_dni'";
+		$rs = ejecutarConsultaSimpleFila($sql1);
+		$id_alumno = $rs['id_alumno'];
+
+		
+		if(  $momento == 'inicio'   ){
+
+			$sql2="INSERT INTO asistenciacursos (id_curso, id_alumno, fecha_ingreso) VALUES ( '$id_curso' , '$id_alumno', NOW() )";
+			return ejecutarConsulta($sql2);
+
+		}elseif( $momento == 'medio' ){
+
+			$sql2="UPDATE asistenciacursos
+					SET fecha_intermedia = NOW()   WHERE id_curso= '$id_curso' AND  id_alumno = '$id_alumno'  ";
+
+			return ejecutarConsulta($sql2);
+
+		}else {
+			$sql2="UPDATE asistenciacursos
+					SET	fecha_salida = NOW()   WHERE id_curso= '$id_curso' AND id_alumno = '$id_alumno'  ";
+			return ejecutarConsulta($sql2);
+		}
+
+		
+	}
+
+
 
 
 	//Implementar un método paraverificar si el alumno existe
@@ -122,11 +284,13 @@ Class Asistencia
 
 }
 
-// $asistencia=new Asistencia();
+ //$asistencia=new Asistencia();
 
 
-// $rspta=$asistencia->validar_url('27' , 'yK7j2GbSsp');
-// var_dump($rspta);
+//$rspta=$asistencia->si_se_matriculo( 45862145, 27, 'inicio' );
+//$rspta=$asistencia->si_user_existe(45862145);
+ 		
+//var_dump($rspta);
 
 
 ?>

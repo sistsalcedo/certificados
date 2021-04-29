@@ -38,7 +38,7 @@ $momento = $_GET['momento'];
                         <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-6">
                           <label>DNI:</label> 
                           <input type="tel" class="form-control" name="txt_dni" id="txt_dni"  placeholder="Documento de Identidad" maxlength="8" required >
-                          <input type="hidden" name="id_curso" id="id_curso" value=" <?php  echo $idcurso ?> " >
+                          <input type="hidden" name="id_curso" id="id_curso" value=" <?php  echo $id_curso ?> " >
                           <input type="hidden" name="momento" id="momento" value=" <?php  echo $momento ?> " >
                         </div>                       
                         <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" align="center">

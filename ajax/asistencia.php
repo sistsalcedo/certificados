@@ -7,10 +7,7 @@ $asistencia=new Asistencia();
 
 $txt_dni=isset($_POST["txt_dni"])? limpiarCadena($_POST["txt_dni"]):"";
 $id_curso=isset($_POST["id_curso"])? limpiarCadena($_POST["id_curso"]):"";
-$txt_apenom=isset($_POST["txt_apenom"])? limpiarCadena($_POST["txt_apenom"]):"";
-// $txt_email=isset($_POST["txt_email"])? limpiarCadena($_POST["txt_email"]):"";
-// $txt_celular=isset($_POST["txt_celular"])? limpiarCadena($_POST["txt_celular"]):"";
-// $flag=isset($_POST["flag"])? limpiarCadena($_POST["flag"]):"";
+$apenom=isset($_POST["apenom"])? limpiarCadena($_POST["apenom"]):"";
 $cadena=isset($_POST["cadena"])? limpiarCadena($_POST["cadena"]):"";
 $momento=isset($_POST["momento"])? limpiarCadena($_POST["momento"]):"";
 
@@ -68,7 +65,7 @@ switch ($_GET["op"]){
 	break;
 
 	case 'validar_url':
-		$rspta=$asistencia->validar_url($id_curso , $cadena);
+		$rspta=$asistencia->validar_url($id_curso , $cadena, $momento);
  		echo json_encode($rspta);
 	break;
 
@@ -77,6 +74,45 @@ switch ($_GET["op"]){
 		$rspta=$asistencia->si_enlace_vigente($id_curso , $cadena);
  		echo json_encode($rspta);
 	break;
+
+	case 'si_se_matriculo':
+		$rspta=$asistencia->si_se_matriculo( $txt_dni, $id_curso, $momento );
+ 		echo json_encode($rspta);
+	break;
+
+	case 'si_user_existe':
+		$rspta=$asistencia->si_user_existe($txt_dni);
+ 		//Codificar el resultado utilizando json
+ 		echo json_encode($rspta);
+	break;
+
+
+	case 'ip_matricula':
+		$rspta=$asistencia->ip_matricula( $id_curso );
+ 		//Codificar el resultado utilizando json
+ 		echo json_encode($rspta);
+	break;
+
+	case 'matricular':
+		$rspta=$asistencia->matricular($id_curso , $txt_dni, $momento );
+ 		//Codificar el resultado utilizando json
+ 		echo $rspta ? "Correcto " : "No se pudo marcar asistencia. Intentelo denuevo";
+	break;
+
+	case 'crearuser_matricular_asistencia':
+		$rspta=$asistencia->crearuser_matricular_asistencia($id_curso , $txt_dni, $apenom );
+ 		//Codificar el resultado utilizando json
+ 		echo $rspta ? "Correcto " : "No se pudo marcar asistencia. Intentelo denuevo";
+	break;
+
+	case 'marcar_asistencia':
+		$rspta=$asistencia->marcar_asistencia($txt_dni, $id_curso, $momento );
+ 		//Codificar el resultado utilizando json
+ 		echo $rspta ? "Correcto " : "No se pudo marcar asistencia. Intentelo denuevo";
+	break;
+
+
+
 
 	case 'registrar':
 		$rspta=$asistencia->registrarParticipante($txt_dni, $id_curso);
