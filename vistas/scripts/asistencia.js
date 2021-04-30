@@ -16,7 +16,7 @@ function init(){
  		console.log(id_curso+' '+txt_dni +' '+momento);
 
   	 	si_marco_asistencia(  txt_dni, id_curso, momento );
-  	 	$("#consultar").prop("disabled",true);
+  	 	
 
 	})
 
@@ -110,6 +110,7 @@ function si_enlace_vigente(id_curso, cadena )
 
 function si_marco_asistencia(  txt_dni, id_curso, momento ){
 
+	$("#btn_consultar").hide();
 
 	$.post("../../ajax/asistencia.php?op=si_marco_asistencia",{txt_dni : txt_dni, id_curso:id_curso, momento:momento }, function(data, status)
 	{
@@ -369,7 +370,7 @@ function nombre_curso(id_curso){
 function limpiar()
 {
 	$("#txt_dni").val("");
-	$("#consultar").prop("disabled",false);
+	$("#btn_consultar").show(1000);
 	
 
 }

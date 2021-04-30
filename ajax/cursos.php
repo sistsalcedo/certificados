@@ -177,7 +177,7 @@ switch ($_GET["op"]){
  		while ($reg=$rspta->fetch_object()){
  			$data[]=array(
  				
- 				"0"=>$reg->nombre_curso,
+ 				"0"=>utf8_encode($reg->nombre_curso),
  				"1"=>'<div class="text-center">'.$reg->fecha_inicio." ".$reg->hora_inicio.'</div>',
  				"2"=>'<div class="text-center"><button class="btn  btn-success" onclick="mostrar('.$reg->id_curso.')"><i class="fa fa-eye"></i> <small> Ver</samll></button>'.
  					' <button class="btn  btn-info" onclick="mostrar('.$reg->id_curso.')"><i class="fa  fa-users"></i> <small> Particpantes</samll></button>'.

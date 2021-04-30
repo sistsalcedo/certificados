@@ -53,7 +53,7 @@ $momento = $_GET['momento'];
                           <input type="hidden" name="id_curso" id="id_curso" value=" <?php  echo $id_curso ?> " >
                           <input type="hidden" name="momento" id="momento" value=" <?php  echo $momento ?> " >
                         </div>                       
-                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" align="center">
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" id="btn_consultar" align="center">
                           <button type="submit" class="genric-btn success circle"   id="consultar" ><i class="fa fa-save"> </i>Enviar</button>                               
 
                         </div>
