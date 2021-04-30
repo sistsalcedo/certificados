@@ -97,6 +97,30 @@ Class Curso
 				WHERE fecha_inicio >= CURDATE() ORDER BY fecha_inicio asc ";
 		return ejecutarConsulta($sql);		
 	}
+
+
+	public function generar_cert_url($idcurso){
+
+
+		$sql="SELECT id_asistencia, id_curso, id_alumno, fecha_ingreso, fecha_salida, fecha_intermedia, ip_asistencia
+			FROM asistenciacursos
+			WHERE id_curso = '$idcurso' AND fecha_ingreso IS NOT NULL AND fecha_intermedia IS NOT NULL AND fecha_salida IS NOT NULL";
+		$rspta =  ejecutarConsulta($sql);
+
+		$data = "";
+
+		while ($reg=$rspta->fetch_object()){
+
+
+			$sql2 ="INSERT INTO certificados_x_url (id_certificado_url, id_curso, nombre_curso, fecha_inicio_curso, fecha_fin_curso, organizador_curso, modelo_certificado, modalidad_curso, tpo_certificado, apellidos_nombres, id_alumno, firma_presidente, firma_organizador, firma_opcional, n_certificado, codigo_certificado, qr_certificado, f_created, descargado_certificado)
+				VALUES (@id_certificado_url, @id_curso, @nombre_curso, @fecha_inicio_curso, @fecha_fin_curso, @organizador_curso, @modelo_certificado, @modalidad_curso, @tpo_certificado, @apellidos_nombres, @id_alumno, @firma_presidente, @firma_organizador, @firma_opcional, @n_certificado, @codigo_certificado, @qr_certificado, @f_created, @descargado_certificado)";
+
+
+
+
+		}
+
+	}
 }
 
 

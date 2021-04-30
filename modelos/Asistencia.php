@@ -175,7 +175,7 @@ Class Asistencia
 
 	//Verificar si la ip de la maquina son iguales q la actual
 	public function ip_asistencia($id_curso, $txt_dni, $momento )
-	{	
+	{								
 		
 
 		$ipreal = $_SERVER['REMOTE_ADDR'];
@@ -183,17 +183,17 @@ Class Asistencia
 		
 		if ($momento == 'inicio') {
 
-			$sql="SELECT * FROM asistenciacursos WHERE id_curso = '$id_curso' AND ip_asistencia = '$ipreal' AND fecha_ingreso IS NOT NULL  ";
+			$sql="SELECT * FROM asistenciacursos WHERE id_curso = '$id_curso' AND ip_asistencia = '$ipreal' AND fecha_ingreso IS NOT NULL   ";
 			return ejecutarConsultaSimpleFila($sql);
 
 		}elseif ($momento == 'medio') {
 			
-			$sql="SELECT * FROM asistenciacursos WHERE id_curso = '$id_curso' AND ip_asistencia = '$ipreal' AND fecha_intermedia IS NOT NULL  ";
+			$sql="SELECT * FROM asistenciacursos WHERE id_curso = '$id_curso' AND ip_asistencia = '$ipreal' AND fecha_intermedia IS NOT NULL   ";
 			return ejecutarConsultaSimpleFila($sql);
 
 		}else{
 
-			$sql="SELECT * FROM asistenciacursos WHERE id_curso = '$id_curso' AND ip_asistencia = '$ipreal' AND fecha_salida IS NOT NULL  ";
+			$sql="SELECT * FROM asistenciacursos WHERE id_curso = '$id_curso' AND ip_asistencia = '$ipreal' AND fecha_salida IS NOT NULL   ";
 			return ejecutarConsultaSimpleFila($sql);
 
 		}
@@ -217,7 +217,7 @@ Class Asistencia
 		
 		if(  $momento == 'inicio'   ){
 
-			$sql2="INSERT INTO asistenciacursos (id_curso, id_alumno, fecha_ingreso) VALUES ( '$id_curso' , '$id_alumno', NOW() )";
+			$sql2="INSERT INTO asistenciacursos (id_curso, id_alumno, fecha_ingreso, ip_asistencia) VALUES ( '$id_curso' , '$id_alumno', NOW() , '$ipreal' )";
 			return ejecutarConsulta($sql2);
 
 		}elseif( $momento == 'medio' ){
@@ -237,11 +237,11 @@ Class Asistencia
 	}
 
 
-	public function crearuser_matricular_asistencia($id_curso , $txt_dni, $apenom )
+	public function crearuser_matricular_asistencia($id_curso , $txt_dni, $apenom, $momento  )
 	{
 		
-		$sql1="INSERT INTO alumnos ( dni, apenom) VALUES ( '$id_curso', '$apenom')";
-		$$id_alumno = ejecutarConsulta_retornarID($sql1);
+		$sql1="INSERT INTO alumnos ( dni, apenom) VALUES ( '$txt_dni', '$apenom')";
+		$id_alumno = ejecutarConsulta_retornarID($sql1);
 
 		$ipreal = $_SERVER['REMOTE_ADDR'];
 
@@ -303,6 +303,14 @@ Class Asistencia
 	}
 
 
+			// Buscar biscar si el usuario existe en la base de datos
+	public function nombre_curso($id_curso)
+	{
+		$sql="	SELECT id_curso, nombre_curso, id_ponente, img_curso, modelo_certificado_curso, firma1_curso, firma2_curso, objetivo_curso, fecha_inicio, hora_inicio, fecha_fin, hora_fin, modalidad_curso, organizador, estado_curso, condicion
+			FROM cursos
+			WHERE id_curso = '$id_curso'";
+		return ejecutarConsultaSimpleFila($sql);
+	}
 
 
 	//Implementar un método paraverificar si el alumno existe

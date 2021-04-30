@@ -376,4 +376,40 @@ function guardaryeditar(e)
 }
 
 
+function generar_cert(idcurso){
+
+	bootbox.confirm({
+	    title: "Generar Certificados!",
+	    message: "Estas seguro que desea generar los certificados?. Tienes que verificar los siguiente:<br><ul><li>Curso finalizado.</li><li>Toma de asistencia finalizado.</li><li>Que los archivos necesarios para generar los certificados sean los correctos como: Modelo de certiicado, las firmas y los datos del curso.</li></ul>",
+	    buttons: {
+	        confirm: {
+            label: 'SI',
+            className: 'btn-success'
+	        },
+	        cancel: {
+	            label: 'No',
+	            className: 'btn-danger'
+	        }
+	    },
+	    callback: function (result) {
+	        console.log('This was logged in the callback: ' + result);
+	        generar_cert_url(id_curso);
+	    }
+	});
+
+}
+
+function generar_cert_url(idcurso){
+
+	$.post("../../ajax/cursos.php?op=generar_cert_url",{idcurso : idcurso}, function(data, status)
+	{
+		
+
+ 	})
+
+
+
+}
+
+
 init();

@@ -112,17 +112,22 @@ switch ($_GET["op"]){
 	break;
 
 	case 'crearuser_matricular_asistencia':
-		$rspta=$asistencia->crearuser_matricular_asistencia($id_curso , $txt_dni, $apenom );
+		$rspta=$asistencia->crearuser_matricular_asistencia($id_curso , $txt_dni, $apenom, $momento );
  		//Codificar el resultado utilizando json
- 		echo $rspta ? "Correcto " : "No se pudo marcar asistencia. Intentelo denuevo";
+ 		echo $rspta ? "Usted marcó su asistencia correctamente " : "No se pudo marcar asistencia. Intentelo denuevo";
 	break;
 
 	case 'marcar_asistencia':
 		$rspta=$asistencia->marcar_asistencia($txt_dni, $id_curso, $momento );
  		//Codificar el resultado utilizando json
- 		echo $rspta ? "Correcto " : "No se pudo marcar asistencia. Intentelo denuevo";
+ 		echo $rspta ? "Usted marcó su asistencia correctamente " : "No se pudo marcar asistencia. Intentelo denuevo";
 	break;
 
+	case 'nombre_curso':
+		$rspta=$asistencia->nombre_curso( $id_curso );
+ 		//Codificar el resultado utilizando json
+ 		echo json_encode($rspta);
+	break;
 
 
 

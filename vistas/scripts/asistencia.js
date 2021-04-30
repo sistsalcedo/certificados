@@ -16,7 +16,7 @@ function init(){
  		console.log(id_curso+' '+txt_dni +' '+momento);
 
   	 	si_marco_asistencia(  txt_dni, id_curso, momento );
-  	 	//si_se_matriculo( txt_dni, id_curso, momento );
+  	 	$("#consultar").prop("disabled",true);
 
 	})
 
@@ -38,6 +38,10 @@ function mostrar_pagina(flag)
 		$("#todo_bien").hide();
 	}
 }
+
+
+
+
 
 function validar_url(id_curso, cadena, momento )
 {
@@ -118,6 +122,7 @@ function si_marco_asistencia(  txt_dni, id_curso, momento ){
 				  title: 'Oops...',
 				  text: 'Usted ya marcó su asistencia.'
 				});
+			limpiar();
 
 		} else {
 
@@ -156,7 +161,7 @@ function si_se_matriculo( txt_dni, id_curso, momento )
 	  				title: 'Oops...',
 	  				text: 'Ya no puede marcar su asistencia, porque no se encuentra matriculado. La MATRICULA se realiza al comienzo del curso'
 		        });
-		        mostrar_pagina(false);
+		        limpiar();
 		}			
  	})
 
@@ -167,7 +172,7 @@ function si_se_matriculo( txt_dni, id_curso, momento )
 
 function ip_matriculado_existe(txt_dni, id_curso, momento){
 
-	$.post("../../ajax/asistencia.php?op=ip_asistencia",{id_curso : id_curso, txt_dni:txt_dni, momento:momento }, function(data, status)
+	$.post("../../ajax/asistencia.php?op=ip_asistencia",{id_curso : id_curso, txt_dni : txt_dni, momento : momento }, function(data, status)
 	{
 		
 		if (data != 'null') {
@@ -178,7 +183,7 @@ function ip_matriculado_existe(txt_dni, id_curso, momento){
 				  title: 'Oops...',
 				  text: 'No se puede marcar la asistencia de otra persona desde este mismo equipo.'
 				});
-			//limpiar();
+			limpiar();
 			//ocultarBtnLimpiar();
 			//mostrarFormularioMatricula(false);
 
@@ -229,7 +234,7 @@ function ip_matricula_si_e( id_curso , txt_dni, momento){
 				  title: 'Oops...',
 				  text: 'No se puede inscribir a otras personas al mismo curso, desde este  mismo equipo.'
 				});
-			//limpiar();
+			limpiar();
 			//ocultarBtnLimpiar();
 			//mostrarFormularioMatricula(false);
 
@@ -257,7 +262,7 @@ function ip_matricula_no_e(id_curso , txt_dni, momento){
 				  title: 'Oops...',
 				  text: 'No puede inscribir a otras personas al mismo curso desde este equipo.'
 				});
-			//limpiar();
+			limpiar();
 			//ocultarBtnLimpiar();
 			//mostrarFormularioMatricula(false);
 
@@ -278,7 +283,7 @@ function matricular(txt_dni, id_curso, momento){
 		//console.log(data);
 
 		Swal.fire('Aviso', data );
-		//limpiar();	
+		limpiar();	
 		//ocultarBtnLimpiar();
 		//mostrarFormularioMatricula(false);
  		
@@ -301,12 +306,12 @@ function verificar_si_dni_valido(id_curso , txt_dni , momento){
 				title: 'Oops...',
 				text: 'Ingresar un DNI válido.'
 			});
-			//limpiar();	
+			limpiar();	
 
 		} else {
 
 			var apenom = data.apellidoPaterno+" "+data.apellidoMaterno+" "+data.nombres;
-			crearuser_matricular_asistencia(id_curso , txt_dni, apenom);
+			crearuser_matricular_asistencia(id_curso , txt_dni, apenom, momento);
 		}				
 	});
 	
@@ -314,14 +319,14 @@ function verificar_si_dni_valido(id_curso , txt_dni , momento){
 }
 
 
-function crearuser_matricular_asistencia(id_curso , txt_dni, apenom) {
+function crearuser_matricular_asistencia(id_curso , txt_dni, apenom,momento) {
 
-	$.post("../../ajax/asistencia.php?op=crearuser_matricular_asistencia",{id_curso : id_curso, txt_dni : txt_dni, apenom : apenom  }, function(data, status)
+	$.post("../../ajax/asistencia.php?op=crearuser_matricular_asistencia",{id_curso : id_curso, txt_dni : txt_dni, apenom : apenom, momento: momento  }, function(data, status)
 	{
 		//console.log(data);
 
 		Swal.fire('Aviso', data );
-		//limpiar();	
+		limpiar();	
 		//ocultarBtnLimpiar();
 		//mostrarFormularioMatricula(false);
  		
@@ -337,7 +342,7 @@ function marcar_asistencia( txt_dni, id_curso, momento){
 		//console.log(data);
 
 		Swal.fire('Aviso', data );
-		//limpiar();	
+		limpiar();	
 		//ocultarBtnLimpiar();
 		//mostrarFormularioMatricula(false);
  		
@@ -347,15 +352,24 @@ function marcar_asistencia( txt_dni, id_curso, momento){
 
 
 
+function nombre_curso(id_curso){
 
+	$.post("../../ajax/asistencia.php?op=nombre_curso",{id_curso : id_curso}, function(data, status)
+	{
+		data = JSON.parse(data);	
+		console.log(data);
+
+		$("#nombre_curso").html(data.nombre_curso);		
+ 		
+ 	})
+}
 
 
 //Función limpiar
 function limpiar()
 {
 	$("#txt_dni").val("");
-	$("#id_curso").val("");
-	$("#momento").val("");
+	$("#consultar").prop("disabled",false);
 	
 
 }

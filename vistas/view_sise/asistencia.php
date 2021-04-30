@@ -19,13 +19,25 @@ $momento = $_GET['momento'];
 
                   <div class="single_video">
                     <h1 id="nombre_curso_frm" style="color:white;" >ASISTENCIA</h1>
-                    <h2 style="color:white;">Temporal</h2><br>
+                    <h2 style="color:white;">
+                      <?php 
+                        if ($momento == 'inicio') {
+                          echo 'al iniciar el curso';
+                        } elseif($momento == 'medio') {
+                          echo 'de mitad de curso';
+                        }else{
+                          echo 'final del curso';
+                                                }
+
+                       ?>
+                    </h2><br>
                     
                   </div>
                 </div>
                 <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 bg-white p-4" id="div_asistencia" name ="div_asistencia" >
                   <div align="center">
-                    <h3>Marcar Asistencia</h3>
+                    <h3>CURSO</h3>
+                    <h6 id="nombre_curso"></h6>
                   </div>
                   <hr>
                   <div class="container">
@@ -117,4 +129,5 @@ require "footer.php";
   <script>
      
       validar_url('<?php echo $id_curso  ?>','<?php echo $cadena  ?>','<?php echo $momento  ?>');
+      nombre_curso('<?php echo $id_curso  ?> ?>');
   </script>
