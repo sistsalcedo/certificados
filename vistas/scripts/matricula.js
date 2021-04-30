@@ -116,6 +116,7 @@ function removerLoading()
 
 function Ejecutar_consulta( id_curso , txt_dni, txt_apenom ){
 	
+	btn_para_q_se_registren(false);
 	user(id_curso , txt_dni, txt_apenom);
 
 }
