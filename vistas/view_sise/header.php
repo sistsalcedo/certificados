@@ -52,7 +52,7 @@
                         <div class="col-xl-2 col-lg-2">
                             <div class="logo-img">
                                 <a href="index.php">
-                                    <img src="img/logo_1.png" alt="">
+                                    <img src="img/logo_pj.png" alt="">
                                 </a>
                             </div>
                         </div>
