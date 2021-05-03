@@ -99,18 +99,33 @@ Class Curso
 	}
 
 
-	public function obtenerLista_aptos($idcurso){
+	public function generar_cert_url($idcurso, $fecha_inicio){
 
-		$sql="SELECT id_asistencia, id_curso, id_alumno, fecha_ingreso, fecha_salida, fecha_intermedia, ip_asistencia
+		$n_ulitmo_certificado = "SELECT id_certificado_url, id_curso, nombre_curso, fecha_inicio_curso, fecha_fin_curso, organizador_curso, modelo_certificado, modalidad_curso, tpo_certificado, apellidos_nombres, id_alumno, firma_presidente, firma_organizador, firma_opcional, n_certificado, codigo_certificado, qr_certificado, f_created, descargado_certificado
+			FROM certificados_x_url
+			WHERE Date_format(fecha_inicio_curso,'%Y') = 2021 ORDER BY id_certificado_url desc limit 1" ;
+		$rspta = ejecutarConsultaSimpleFila($n_ulitmo_certificado);
+
+		$n_cert =  $rspta["n_certificado"] + 1;
+		$mes = date("m", strtotime($rspta["n_certificado"])) ;
+		$tpo_certificado = 'ASISTENTE';
+		$codigo_certificado = $n_cert.'-'.$mes.'-2021-CV-CSJHCO-PJ'.
+
+		$sql="SELECT id_asistencia, asistenciacursos.id_curso, cursos.nombre_curso, cursos.fecha_inicio, cursos.fecha_fin, cursos.organizador, cursos.modelo_certificado_curso, cursos.modalidad_curso, cursos.firma1_curso, cursos.firma2_curso,
+		 asistenciacursos.id_alumno, alumnos.dni, alumnos.apenom,  fecha_ingreso, fecha_salida, fecha_intermedia, ip_asistencia
 			FROM asistenciacursos
-			WHERE id_curso = '$idcurso' AND fecha_ingreso IS NOT NULL AND fecha_intermedia IS NOT NULL AND fecha_salida IS NOT NULL";
-		$rspta =  ejecutarConsulta($sql);
+			INNER JOIN cursos ON asistenciacursos.id_curso = cursos.id_curso
+			INNER JOIN alumnos ON asistenciacursos.id_alumno = alumnos.id_alumno
+			WHERE asistenciacursos.id_curso = '$idcurso' AND fecha_ingreso IS NOT NULL AND fecha_intermedia IS NOT NULL AND fecha_salida IS NOT NULL";
+		$rspta1 =  ejecutarConsulta($sql);
 
 		$data = "";
 
-		while ($reg=$rspta->fetch_object()){
+		while ($reg=$rspta1->fetch_object()){
 
-			datos_p_certificado_url($reg->id_curso, $reg->id_alumno);
+			$sql2 ="INSERT INTO certificados_x_url ( id_curso, nombre_curso, fecha_inicio_curso, fecha_fin_curso, organizador_curso, modelo_certificado, modalidad_curso, tpo_certificado, apellidos_nombres, id_alumno, firma_presidente, firma_organizador, n_certificado, codigo_certificado, qr_certificado, f_created)
+				VALUES ( '.$reg->id_curso.', '.$reg->nombre_curso.', '.$reg->fecha_inicio.', '.$reg->organizador.', '.$reg->modelo_certificado_curso.','.$reg->modalidad_curso.', '.$tpo_certificado.', '.$reg->apenom.', '.$reg->dni.', '.$reg->firma1_curso.', '.$reg->firma2_curso.', '.$n_cert.',  '.$codigo_certificado.', '.$codigo_certificado.', '.NOW().')";
+			return ejecutarConsulta($sql2);
 
 		}
 
@@ -120,8 +135,7 @@ Class Curso
 
 
 
-			$sql2 ="INSERT INTO certificados_x_url (id_certificado_url, id_curso, nombre_curso, fecha_inicio_curso, fecha_fin_curso, organizador_curso, modelo_certificado, modalidad_curso, tpo_certificado, apellidos_nombres, id_alumno, firma_presidente, firma_organizador, firma_opcional, n_certificado, codigo_certificado, qr_certificado, f_created, descargado_certificado)
-				VALUES (@id_certificado_url, @id_curso, @nombre_curso, @fecha_inicio_curso, @fecha_fin_curso, @organizador_curso, @modelo_certificado, @modalidad_curso, @tpo_certificado, @apellidos_nombres, @id_alumno, @firma_presidente, @firma_organizador, @firma_opcional, @n_certificado, @codigo_certificado, @qr_certificado, @f_created, @descargado_certificado)";
+			
 	}
 }
 

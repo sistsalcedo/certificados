@@ -376,35 +376,36 @@ function guardaryeditar(e)
 }
 
 
-function generar_cert(idcurso){
+function modal(idcurso,fecha_inicio){
+
+
+
 
 	bootbox.confirm({
-	    title: "Generar Certificados!",
-	    message: "Estas seguro que desea generar los certificados?. Tienes que verificar los siguiente:<br><ul><li>Curso finalizado.</li><li>Toma de asistencia finalizado.</li><li>Que los archivos necesarios para generar los certificados sean los correctos como: Modelo de certiicado, las firmas y los datos del curso.</li></ul>",
-	    buttons: {
-	        confirm: {
-            label: 'SI',
+    message: "This is a confirm with custom button text and color! Do you like it?",
+    buttons: {
+        confirm: {
+            label: 'Yes',
             className: 'btn-success'
-	        },
-	        cancel: {
-	            label: 'No',
-	            className: 'btn-danger'
-	        }
-	    },
-	    callback: function (result) {
-	        console.log('This was logged in the callback: ' + result);
-	        generar_cert_url(id_curso);
-	    }
-	});
+        },
+        cancel: {
+            label: 'No',
+            className: 'btn-danger'
+        }
+    },
+    callback: function (result) {
+        generar_cert_url(idcurso,fecha_inicio);
+    }
+});
 
 }
 
-function generar_cert_url(idcurso){
+function generar_cert_url(idcurso,fecha_inicio){
 
-	$.post("../../ajax/cursos.php?op=generar_cert_url",{idcurso : idcurso}, function(data, status)
+	$.post("../../ajax/cursos.php?op=generar_cert_url",{idcurso : idcurso, fecha_inicio:fecha_inicio }, function(data, status)
 	{
 		
-
+		bootbox.alert(data);
  	})
 
 
