@@ -64,12 +64,30 @@ Class Certificado
 		return ejecutarConsulta($sql);		
 	}
 
+
+	//Implementar un método para mostrar los datos de un registro a modificar
+	public function verificar_table_cert($dni)
+	{
+		$sql="SELECT * FROM certificados_x_url WHERE id_alumno = '$dni'";
+		return ejecutarConsulta($sql);
+	}
+
+
 	//Implementar un método paraverificar si el alumno existe
 	public function verificar($txtdniOcelular)
 	{
-		$sql="SELECT id_alumno,dni,correo,celular FROM alumnos WHERE (dni = '$txtdniOcelular'  || celular = '$txtdniOcelular' )";
+		$sql="SELECT id_alumno_ant, dni_ant, apenom_ant, correo_ant, celular_ant, detalles_ant, created_ant FROM alumnos_anteriores WHERE dni_ant = '$txtdniOcelular'";
 		return ejecutarConsultaSimpleFila($sql);		
 	}
+
+
+	//Implementar un método paraverificar si el alumno existe
+	public function verificar_nuevos($txtdniOcelular)
+	{
+		$sql="SELECT id_alumno,dni,apenom,correo,celular FROM alumnos WHERE (dni = '$txtdniOcelular'  || celular = '$txtdniOcelular' )";
+		return ejecutarConsultaSimpleFila($sql);		
+	}
+
 
 
 	//Implementar un método para listar los registros

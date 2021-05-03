@@ -6713,7 +6713,8 @@ h6 {
 /* ? ---------------------------- */
 
 #clock {
-  font-size: 5em;
+ /* font-size: 10px;*/
   text-align: center;
   margin: 1em;
+  color: white;
 }

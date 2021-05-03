@@ -81,13 +81,30 @@ function si_enlace_vigente(id_curso, cadena )
 		
 
 		if (data != 'null') {
-
+			data = JSON.parse(data);
 			console.log('enlace vigente');
 			mostrar_pagina(true);
 			mostrardiv(false);
-			//limpiar();
-			//ocultarBtnLimpiar();
-			//mostrarFormularioMatricula(false);
+
+
+			const f  = new Date(data.horainicio_url);
+			meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', ' Set', 'Oct', 'Nov', 'Dic'];
+			
+
+			dia = f.getDate(); // 30
+			mes = f.getMonth(); // 0 (Enero)
+			anio = f.getFullYear(); // 2018
+			hora = f.getHours(); // 15
+			min = f.getMinutes(); // 30
+			segundos = f.getSeconds(); // 10
+
+			fecha = meses[mes]+' '+dia+' '+anio+' '+hora+':'+min+':'+segundos+' GMT-0500';
+			console.log(fecha);
+
+
+
+
+			countdown(fecha, 'clock', 'Culminó el tiempo para la toma de asistencia.');
 
 
 		} else {
@@ -341,7 +358,7 @@ function marcar_asistencia( txt_dni, id_curso, momento){
 	$.post("../../ajax/asistencia.php?op=marcar_asistencia",{id_curso : id_curso, txt_dni : txt_dni,  momento : momento  }, function(data, status)
 	{
 		//console.log(data);
-
+		
 		Swal.fire('Aviso', data );
 		limpiar();	
 		//ocultarBtnLimpiar();
@@ -564,6 +581,53 @@ function removerLoading()
 	$('#loading').fadeOut(1000);			
 	$('#loading').remove();
 }
+
+function Numeros(string){//Solo numeros
+    var out = '';
+    var filtro = '1234567890';//Caracteres validos
+	
+    //Recorrer el texto y verificar si el caracter se encuentra en la lista de validos 
+    for (var i=0; i<string.length; i++)
+       if (filtro.indexOf(string.charAt(i)) != -1) 
+             //Se añaden a la salida los caracteres validos
+	     out += string.charAt(i);
+	
+    //Retornar valor filtrado
+    return out;
+} 
+
+//PARA CONTADOR
+const getRemainingTime = deadline => {
+  let now = new Date(),
+      remainTime = (new Date(deadline) - now + 1000) / 1000,
+      remainSeconds = ('0' + Math.floor(remainTime % 60)).slice(-2),
+      remainMinutes = ('0' + Math.floor(remainTime / 60 % 60)).slice(-2),
+      remainHours = ('0' + Math.floor(remainTime / 3600 % 24)).slice(-2),
+      remainDays = Math.floor(remainTime / (3600 * 24));
+
+  return {
+    remainSeconds,
+    remainMinutes,
+    remainHours,
+    remainTime
+  }
+};
+
+const countdown = (deadline,elem,finalMessage) => {
+  const el = document.getElementById(elem);
+  var x = document.getElementById("todo_bien");
+
+  const timerUpdate = setInterval( () => {
+    let t = getRemainingTime(deadline);
+    el.innerHTML = '<h2 class="text-white">Quedan<br>'+`${t.remainHours}h:${t.remainMinutes}m:${t.remainSeconds}s`+'<br>para el cierre de la asistencia.</h2>';
+
+    if(t.remainTime <= 1) {
+      clearInterval(timerUpdate);
+      x.innerHTML = '<h1 class="text-white text-center">'+finalMessage+'</h1>';
+    }
+
+  }, 1000)
+};
 
 
 

@@ -7,15 +7,15 @@ require "header.php";
 
 <section>
         <!-- slider_area_start -->
-    <div class="slider_area ">
-        <div class="single_slider d-flex align-items-center justify-content-center slider_bg_1">
+    <div class="courses_details_banner ">
+        <div class="slider_bg_1">
             <div class="container">
                 <div class="row align-items-center justify-content-center">
-                      <div class="col-xl-6 col-md-6 d-none d-sm-block">
+                      <div class="col-xl-4 col-md-4 d-none d-sm-block">
                           <h1 class="text-white" >Consulta de Certificados</h1>
                             <p class="text-white">Aqui podra descargar los certificados en PDF, de los cursos que participó</p>
                       </div>  
-                      <div class="col-xl-6 col-md-6">
+                      <div class="col-xl-8 col-md-8">
                           <div name="formularioConsulta" id="formularioConsulta" class="col-md-12 col-sm-12 col-xs-12 p-5 bg-white" >
                                     <div align="center">
                                     <img class="img-fluid" src="../../files/logopjhco.jpg" height="50">
@@ -42,10 +42,12 @@ require "header.php";
                                 </form>
                              </div>
                              <div name="divResultado" id="divResultado" class="col-md-12 col-sm-12 col-xs-12 p-5 bg-white" >
-                                <div style="padding-top: 25px;">
-                                    <div class="row" align="center">
-                                        <img src="../../files/docente.jpg" class="img-rounded"  height="50px" width="100px" alt="">
-                                        <strong style="color: #4153B6; font-size: 20px;">GRACIAS POR PARTICIPAR</strong>
+                                <div style="padding-top: 25px;" class="">
+                                    <div class="row justify-content-center " >
+                                        <!-- <img src="../../files/docente.jpg" class="img-rounded"  height="50px" width="100px" alt=""> -->
+                                        <h2 class="align-content-center" style="color: #4153B6; font-size: 25px;">GRACIAS POR PARTICIPAR</h2>
+                                    </div>
+                                    <div class="row justify-content-center">
                                         <p id="datosAlumno"><small></small></p> 
                                         <!-- <input type="text" name="datosAlumno" id="datosAlumno"> -->
                                     </div>
@@ -53,7 +55,19 @@ require "header.php";
                                         <table id="tbllistado" class="table  table-bordered table-condensed table-hover table-striped">
                                           <thead>
                                             <tr>   
-                                                <th>Cursos</th>
+                                                <th>Cursos pasados</th>
+                                                <th>Descargar</th>                             
+                                              </tr>
+                                            </thead>
+                                            <tbody >                                       
+                                            </tbody>
+                                        </table> 
+                                    </div>
+                                    <div >
+                                        <table id="tbllistado_url" class="table table-responsive table-bordered table-condensed table-hover table-striped">
+                                          <thead>
+                                            <tr>   
+                                                <th>Cursos </th>
                                                 <th>Descargar</th>                             
                                               </tr>
                                             </thead>
@@ -62,13 +76,14 @@ require "header.php";
                                         </table> 
                                     </div>
                                     <br>
-                                    <div class="box-footer" align="center" style="background: #F3F3F3;">
+                                    <div class="box-footer" align="center" >
                                         <button type="button" onclick="mostrardiv(false)" class="btn btn-success"  name="btnvolver" id="btnvolver" class="btn btn-primary">Volver</button>
                                      </div>
-                                     <div style="color: orange">
-                                        <p>
-                                            <small><i class="fa fa-exclamation-triangle"> </i> Si tuviera algun inconveniente con los datos en el certificado, comunicarse al telefono fijo (062) 591030 anexo 45005 / 45033</small>
-                                        </p>
+                                     <br>
+                                     <div >
+                                        <blockquote class=" generic-blockquote">
+                                            <strong><i class="fa fa-exclamation-triangle"> </i> Si tuviera algun inconveniente con los datos en el certificado, comunicarse al telefono fijo (062) 591030 anexo 45005 / 45033</strong>
+                                        </blockquote>
                                     </div>                            
                                 </div>
                             </div>

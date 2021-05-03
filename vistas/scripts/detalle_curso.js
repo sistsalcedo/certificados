@@ -16,6 +16,7 @@ function detalleCurso(idcurso) {
 		$("#fecha_curso").html(data.fecha_inicio);
 		$("#hora_curso").html(data.hora_inicio);
 		$("#nombre_ponente").html(data.apenom_ponente);		
+		$("#cargo").html(data.cargo);
 		$('#imagen_curso').attr("src", '../../files/imagen_curso/'+data.img_curso);	
  	})
 }

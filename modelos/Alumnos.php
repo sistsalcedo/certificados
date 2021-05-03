@@ -43,7 +43,14 @@ Class Alumnos
 	//Implementar un método para mostrar los datos de un registro a modificar
 	public function mostrar($txtdniOcelular)
 	{
-		$sql="SELECT * FROM alumnos WHERE (dni = '$txtdniOcelular' || celular = '$txtdniOcelular')";
+		$sql="SELECT * FROM alumnos_anteriores WHERE dni_ant = '$txtdniOcelular' ";
+		return ejecutarConsultaSimpleFila($sql);
+	}
+
+		//Implementar un método para mostrar los datos de un registro a modificar
+	public function mostrarDatos_dninuevos($txtdniOcelular)
+	{
+		$sql="SELECT * FROM alumnos WHERE dni = '$txtdniOcelular' ";
 		return ejecutarConsultaSimpleFila($sql);
 	}
 

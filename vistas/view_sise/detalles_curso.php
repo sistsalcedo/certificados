@@ -47,28 +47,26 @@ $idcurso = $_GET['id'];
         <div class="container">
             <div class="row">
                 <div class="col-xl-7 col-lg-7">
-                    <div class="single_courses">
-                        <h3>Objetivos</h3>
-                        <p>Our set he for firmament morning sixth subdue darkness creeping gathered divide our let god moving. Moving in fourth air night bring upon you’re it beast let you dominion likeness open place day great wherein heaven sixth lesser subdue fowl male signs his day face waters itself and make be to our itself living. Fish in thing lights moveth. Over god spirit morning, greater had man years green multiply creature, form them in, likeness him behold two cattle for divided. Fourth darkness had. Living light there place moved divide under earth. Light face, fly dry us </p>
-                    </div>
-                   
-                </div>
-                <div class="col-xl-5 col-lg-5">
-                    <div class="courses_sidebar">
-                        <div class="video_thumb">
-                            <img id="imagen_curso" src="img/latest_blog/video.png" alt="">
-                        </div>
-                        <div class="author_info bg-white">
-                            <div class="auhor_header">
+                    <div class="author_info bg-white">
+                            <div class="auhor_header p-3 mb-2 rounded-lg ">
                                 <!-- <div class="thumb">
                                         <img src="img/latest_blog/author.png" alt="">
                                 </div> -->
                                 <div class="name">
                                     <h3 id="nombre_ponente"></h3>
-                                    <p>Juez Supremo (T)</p>
+                                    <p  id="cargo"></p>
                                 </div>
                             </div>
                         </div>
+                   
+                </div>
+                <hr>
+                <div class="col-xl-5 col-lg-5">
+                    <div class="courses_sidebar">
+                        <div class="video_thumb">
+                            <img id="imagen_curso" src="img/latest_blog/video.png" alt="">
+                        </div>
+                        <br>
                         <!-- <a onclick="mostrarFormularioMatricula(true)" class="boxed_btn">REGISTRARSE</a> -->
                         <button type="submit" class="boxed_btn" onclick="mostrarFormularioMatricula(true)"> REGISTRARSE</button>  
                     </div>
@@ -80,10 +78,10 @@ $idcurso = $_GET['id'];
     <div class="courses_details_banner" id="formularioregistros">
         <div class="container">
            <div class="row "   >
-                <div class="col-lg-4 col-md-4 col-sm-4 d-none d-sm-block  align-self-center text-center">
+                <div class="col-lg-4 col-md-4 col-sm-4 align-self-center text-center">
                     <img class="img-fluid" src="img/computopj.gif"  alt=""/>
                     <div class="single_video">
-                      <h3 id="nombre_curso_frm" style="color:white;" >Welcome</h3>
+                      <h4 id="nombre_curso_frm" style="color:white;" >Welcome</h4>
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 bg-white p-4" >

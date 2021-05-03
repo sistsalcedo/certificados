@@ -11,10 +11,16 @@ $momento = $_GET['momento'];
 
 <section>
         <!-- slider_area_start -->
-    <div class="slider_area ">
+    <div class="courses_details_banner  ">
         <div class="single_slider d-flex align-items-center justify-content-center slider_bg_1">
             <div class="container">
               <div class="row align-items-center text-center" id="todo_bien">
+                <div class="col-lg-12 col-md-12 col-sm-12   justify-content-center text-center">
+             
+                  <div id="clock" >
+                    
+                  </div>
+                </div>
                 <div class="col-lg-5 col-md-5 col-sm-5   align-self-center text-center">
 
                   <div class="single_video">
@@ -49,7 +55,7 @@ $momento = $_GET['momento'];
                         </div>
                         <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-6">
                           <label>DNI:</label> 
-                          <input type="tel" class="form-control" name="txt_dni" id="txt_dni"  placeholder="Documento de Identidad" maxlength="8" required >
+                          <input type="text" class="form-control" name="txt_dni" id="txt_dni" onkeyup="this.value=Numeros(this.value)" placeholder="Documento de Identidad" maxlength="8" required >
                           <input type="hidden" name="id_curso" id="id_curso" value=" <?php  echo $id_curso ?> " >
                           <input type="hidden" name="momento" id="momento" value=" <?php  echo $momento ?> " >
                         </div>                       

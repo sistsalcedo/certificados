@@ -1,6 +1,7 @@
 <?php 
 
 $dni = $_GET['txt_dni'];
+$curso = $_GET['id_curso'];
 
 require '../../config/connection.php';
 require '../../modelos/funciones.php';
@@ -8,7 +9,7 @@ require_once('../../qrcode/qrcode.class.php');
 include 'plantilla.php';
 
 
-$sql = "SELECT * FROM certificados_x_url WHERE id_alumno = '$dni'  ";
+$sql = "SELECT * FROM certificados_x_url WHERE  id_curso = '$curso' AND id_alumno = '$dni'";
         
         
 
@@ -90,7 +91,7 @@ while ($reg=$rspta->fetch_object()){
     
     $nombreCertificado = $reg->qr_certificado.'.pdf';
 
-    $qrcode = new QRcode( $url.'/files/certificados/'.$nombreCertificado , 'L'); // error level : L, M, Q, H      
+    $qrcode = new QRcode( $url.'/vistas/certificados/certificado_x_url.php?txt_dni='.$reg->id_alumno.'&id_curso='.$reg->id_curso , 'L'); // error level : L, M, Q, H      
     //$qrcode-> displayFPDF ($pdf, 28, 160,20 );//original
     $qrcode-> displayFPDF ($pdf, 32, 160,20 );
     
@@ -105,7 +106,7 @@ while ($reg=$rspta->fetch_object()){
 
     
   //$pdf->OutPut('../../files/certificados/'.$nombreCertificado,'F');
-    $pdf->OutPut();
+    $pdf->OutPut('D', $reg->nombre_curso.'.pdf');
     
     //$pdf->OutPut('../../files/certificados/bb.pdf','F');
 

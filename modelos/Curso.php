@@ -54,7 +54,7 @@ Class Curso
 	//Implementar un método para mostrar los datos de un registro a modificar
 	public function mostrar($idcurso)
 	{
-		$sql="SELECT *, ponente.apenom_ponente  FROM cursos
+		$sql="SELECT *, ponente.apenom_ponente, ponente.cargo   FROM cursos
 				INNER JOIN ponente ON cursos.id_ponente = ponente.id_ponente
 				WHERE id_curso = '$idcurso' ";
 		return ejecutarConsultaSimpleFila($sql);
@@ -99,8 +99,7 @@ Class Curso
 	}
 
 
-	public function generar_cert_url($idcurso){
-
+	public function obtenerLista_aptos($idcurso){
 
 		$sql="SELECT id_asistencia, id_curso, id_alumno, fecha_ingreso, fecha_salida, fecha_intermedia, ip_asistencia
 			FROM asistenciacursos
@@ -111,15 +110,18 @@ Class Curso
 
 		while ($reg=$rspta->fetch_object()){
 
-
-			$sql2 ="INSERT INTO certificados_x_url (id_certificado_url, id_curso, nombre_curso, fecha_inicio_curso, fecha_fin_curso, organizador_curso, modelo_certificado, modalidad_curso, tpo_certificado, apellidos_nombres, id_alumno, firma_presidente, firma_organizador, firma_opcional, n_certificado, codigo_certificado, qr_certificado, f_created, descargado_certificado)
-				VALUES (@id_certificado_url, @id_curso, @nombre_curso, @fecha_inicio_curso, @fecha_fin_curso, @organizador_curso, @modelo_certificado, @modalidad_curso, @tpo_certificado, @apellidos_nombres, @id_alumno, @firma_presidente, @firma_organizador, @firma_opcional, @n_certificado, @codigo_certificado, @qr_certificado, @f_created, @descargado_certificado)";
-
-
-
+			datos_p_certificado_url($reg->id_curso, $reg->id_alumno);
 
 		}
 
+	}
+
+	public function datos_p_certificado_url( $id_curso, $id_alumno ){
+
+
+
+			$sql2 ="INSERT INTO certificados_x_url (id_certificado_url, id_curso, nombre_curso, fecha_inicio_curso, fecha_fin_curso, organizador_curso, modelo_certificado, modalidad_curso, tpo_certificado, apellidos_nombres, id_alumno, firma_presidente, firma_organizador, firma_opcional, n_certificado, codigo_certificado, qr_certificado, f_created, descargado_certificado)
+				VALUES (@id_certificado_url, @id_curso, @nombre_curso, @fecha_inicio_curso, @fecha_fin_curso, @organizador_curso, @modelo_certificado, @modalidad_curso, @tpo_certificado, @apellidos_nombres, @id_alumno, @firma_presidente, @firma_organizador, @firma_opcional, @n_certificado, @codigo_certificado, @qr_certificado, @f_created, @descargado_certificado)";
 	}
 }
 

@@ -1,6 +1,7 @@
 <?php 
 	
 require_once "../modelos/Curso.php";
+require '../modelos/funciones.php';
 
 $curso=new Curso();
 
@@ -78,7 +79,7 @@ switch ($_GET["op"]){
 
 
 			// Consulta para verificar los archivos subidos
-			if (!((strpos($tipo_archivo_img, "png") || strpos($tipo_archivo_img, "jpeg")) && ($tamano_archivo < 600000))) {
+			if (!((strpos($tipo_archivo_img, "png") || strpos($tipo_archivo_img, "jpeg")))) {
 			   	echo "La extensión o el tamaño de la Imagen del curso no es correcta. <br><br><table><tr><td><li>Se permiten archivos .png o .jpg<br><li>se permiten archivos de 500 Kb máximo.</td></tr></table>";
 			}elseif (!((strpos($tipo_archivo_certificado, "png") || strpos($tipo_archivo_certificado, "jpeg")))) {
 
@@ -152,7 +153,7 @@ switch ($_GET["op"]){
 	                        <h3><a href="detalles_curso.php?id='.$reg->id_curso.'">'.$reg->nombre_curso.'</a></h3>                                        
 	                        <div class="star_prise d-flex justify-content-between">
 	                            <div class="star">
-	                                <span>'.$reg->fecha_inicio.' - '.$reg->hora_inicio.'</span>
+	                                <span>'.fechaSola($reg->fecha_inicio).' - '.$reg->hora_inicio.'</span>
 	                            </div>
 	                            <div class="prise">
 	                                <a href="detalles_curso.php?id='.$reg->id_curso.'" class="genric-btn success radius small">Registrarse</a>
@@ -178,7 +179,7 @@ switch ($_GET["op"]){
  			$data[]=array(
  				
  				"0"=>utf8_encode($reg->nombre_curso),
- 				"1"=>'<div class="text-center">'.$reg->fecha_inicio." ".$reg->hora_inicio.'</div>',
+ 				"1"=>'<div class="text-center">'.fechaSola($reg->fecha_inicio)." ".$reg->hora_inicio.'</div>',
  				"2"=>'<div class="text-center"><button class="btn  btn-success" onclick="mostrar('.$reg->id_curso.')"><i class="fa fa-eye"></i> <small> Ver</samll></button>'.
  					' <button class="btn  btn-info" onclick="mostrar('.$reg->id_curso.')"><i class="fa  fa-users"></i> <small> Particpantes</samll></button>'.
  					' <button class="btn  btn-primary" onclick="inicialEnlaces('.$reg->id_curso.')"><i class="fa  fa-link"></i> <small> Enlaces</samll></button>'.
@@ -205,7 +206,7 @@ switch ($_GET["op"]){
  			$data[]=array(
  				
  				"0"=>$reg->nombre_curso,
- 				"1"=>'<div class="text-center">'.$reg->fecha_inicio." ".$reg->hora_inicio.'</div>',
+ 				"1"=>'<div class="text-center">'.fechaSola($reg->fecha_inicio)." ".$reg->hora_inicio.'</div>',
  				"2"=>'<div class="text-center"><button class="btn  btn-success" onclick="mostrar('.$reg->id_curso.')"><i class="fa fa-eye"></i> <small> Ver</samll></button></div>'			
  				);
  		}

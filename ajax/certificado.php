@@ -48,10 +48,52 @@ switch ($_GET["op"]){
  		echo json_encode($rspta);
 	break;
 
+	case 'mostrarDatos_dninuevos':
+
+		require_once "../modelos/Alumnos.php";
+		$alumnos=new Alumnos();
+
+		$rspta=$alumnos->mostrarDatos_dninuevos($txtdniOcelular);
+ 		//Codificar el resultado utilizando json
+ 		echo json_encode($rspta);
+	break;
+
+
+	case 'verificar_table_cert':
+				
+		$dni = $_GET['txtdniOcelular'];
+		$rspta=$certificado->verificar_table_cert($dni);
+ 		//Vamos a declarar un array
+ 		$data= Array();
+
+ 		while ($reg=$rspta->fetch_object()){
+ 			$data[]=array(
+ 				
+ 				"0"=>'<small>'.$reg->nombre_curso.'</small>',
+ 				"1"=>'<p align="center"><a  href="../../../certificados/vistas/certificados/certificado_x_url.php?txt_dni='.$reg->id_alumno.'&id_curso='.$reg->id_curso.'" download ><i class="fa fa-download"></i></a></p>',
+ 
+ 				);
+ 		}
+ 		$results = array(
+ 			"sEcho"=>1, //Información para el datatables
+ 			"iTotalRecords"=>count($data), //enviamos el total registros al datatable
+ 			"iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+ 			"aaData"=>$data);
+ 		echo json_encode($results);
+ 		//var_dump($results);
+
+
+
+	break;
 
 	case 'verificar':
 		$rspta=$certificado->verificar($txtdniOcelular );
  		echo $rspta ? "1" : "DNI no registrado.";
+	break;
+
+	case 'verificar_nuevos':
+		$rspta=$certificado->verificar_nuevos($txtdniOcelular );
+ 		echo json_encode($rspta);
 	break;
 
 	case 'listar':
@@ -93,7 +135,7 @@ switch ($_GET["op"]){
  		while ($reg=$rspta->fetch_object()){
  			$data[]=array(
  				
- 				"0"=>$reg->nombre_curso,
+ 				"0"=>'<small>'.$reg->nombre_curso.'</small>',
  				"1"=>'<p align="center"><a  href="../../../certificados/files/certificados/'.$reg->pdf_certificado.'" download ><i class="fa fa-download"></i></a></p>',
  
  				);

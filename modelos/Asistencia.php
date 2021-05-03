@@ -280,10 +280,12 @@ Class Asistencia
 		$rs = ejecutarConsultaSimpleFila($sql1);
 		$id_alumno = $rs['id_alumno'];
 
-		
+		$ip_real = $_SERVER['REMOTE_ADDR'];
+
+
 		if(  $momento == 'inicio'   ){
 
-			$sql2="INSERT INTO asistenciacursos (id_curso, id_alumno, fecha_ingreso) VALUES ( '$id_curso' , '$id_alumno', NOW() )";
+			$sql2="INSERT INTO asistenciacursos (id_curso, id_alumno, fecha_ingreso, ip_asistencia) VALUES ( '$id_curso' , '$id_alumno', NOW(), '$ip_real' )";
 			return ejecutarConsulta($sql2);
 
 		}elseif( $momento == 'medio' ){
