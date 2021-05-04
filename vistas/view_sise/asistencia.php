@@ -131,7 +131,7 @@ require "footer.php";
  ?>
 <!-- 
 <script src="../scripts/cuenta_regresiva.js"></script>   -->
-<script src="../scripts/asistencia.js"></script>  
+<script src="../scripts/asistencia_nuevo.js"></script>  
   <script>
      
       validar_url('<?php echo $id_curso  ?>','<?php echo $cadena  ?>','<?php echo $momento  ?>');

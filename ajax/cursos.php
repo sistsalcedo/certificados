@@ -183,7 +183,7 @@ switch ($_GET["op"]){
  				"2"=>'<div class="text-center"><button class="btn  btn-success" onclick="mostrar('.$reg->id_curso.')"><i class="fa fa-eye"></i> <small> Ver</samll></button>'.
  					' <button class="btn  btn-info" onclick="mostrar('.$reg->id_curso.')"><i class="fa  fa-users"></i> <small> Particpantes</samll></button>'.
  					' <button class="btn  btn-primary" onclick="inicialEnlaces('.$reg->id_curso.')"><i class="fa  fa-link"></i> <small> Enlaces</samll></button>'.
- 					' <button class="btn  btn-warning" onclick="modal('.$reg->id_curso.','.$reg->fecha_inicio.')"><i class="fa  fa-graduation-cap" > <small> Generar</samll></i></button>'.
+ 					' <button class="btn  btn-warning" onclick="generar_cert_url('.$reg->id_curso.','.strtotime($reg->fecha_inicio).')"><i class="fa  fa-graduation-cap" > <small> Generar</samll></i></button>'.
  					'  <button class="btn btn-danger" onclick="desactivar('.$reg->id_curso.')"><i class="fa fa-close"></i> <small> Eliminar</samll></button></div>'				
  				);
  		}
@@ -246,7 +246,7 @@ switch ($_GET["op"]){
 	case 'generar_cert_url':
 
 		$rspta=$curso->generar_cert_url($idcurso, $fecha_inicio);
- 		echo $rspta ? "Certificados generados coorrectamente" : "Empleado no se puede desactivar";
+ 		echo $rspta ? "Certificados generados coorrectamente" : "Certificados no se puede desactivar";
 
 	break;
 

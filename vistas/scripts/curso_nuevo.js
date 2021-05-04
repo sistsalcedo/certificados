@@ -379,8 +379,6 @@ function guardaryeditar(e)
 function modal(idcurso,fecha_inicio){
 
 
-
-
 	bootbox.confirm({
     message: "This is a confirm with custom button text and color! Do you like it?",
     buttons: {
@@ -394,7 +392,13 @@ function modal(idcurso,fecha_inicio){
         }
     },
     callback: function (result) {
-        generar_cert_url(idcurso,fecha_inicio);
+        if (result != 'false') {
+        	console.log('llego aqui');
+        	
+        } else{
+        	console.log(result);
+        	generar_cert_url(idcurso,fecha_inicio);
+        }
     }
 });
 

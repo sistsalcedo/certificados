@@ -377,5 +377,5 @@ require '../header.php';
 require '../footer.php';
 ?>
 
-<script type="text/javascript" src="../scripts/curso.js"></script>
+<script type="text/javascript" src="../scripts/curso_nuevo.js"></script>
 <script type="text/javascript" src="../scripts/enlaces_url.js"></script>
