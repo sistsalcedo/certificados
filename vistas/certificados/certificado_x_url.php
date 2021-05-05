@@ -65,7 +65,7 @@ while ($reg=$rspta->fetch_object()){
 
     $pdf->SetFont('Times','',14);
     $pdf->SetTextColor(85, 85, 87); 
-    $html = '<p>Por su participación como <b>'.$reg->tpo_certificado.'</b> en la Conferencia Magistral en la '.$reg->modalidad_curso.'. Organizado por la '.utf8_encode($reg->organizador_curso).';  tema : <b>"'.utf8_encode($reg->nombre_curso).'"</b> llevada por medio de la plataforma Google Hangouts Meet y transmitida por Facebook Live@cortesuperiorhuanuco, el día '.fechaSola($reg->fecha_inicio_curso).'. Con una duración de '.$duracion.' horas lectivas.</p>';
+    $html = '<p>Por su participación como <b>'.$reg->tpo_certificado.'</b> en la Conferencia Magistral en la '.$reg->modalidad_curso.'. Organizado por la '.$reg->organizador_curso.';  tema : <b>"'.$reg->nombre_curso.'"</b> llevada por medio de la plataforma Google Hangouts Meet y transmitida por Facebook Live@cortesuperiorhuanuco, el día '.fechaSola($reg->fecha_inicio_curso).'. Con una duración de '.$duracion.' horas lectivas.</p>';
     $pdf->WriteHTML(utf8_decode($html));
     //$pdf->Write(5,utf8_decode('áéíóú'));
     
