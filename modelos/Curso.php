@@ -122,14 +122,34 @@ Class Curso
 
 		
 
-		while ($reg = $query->fetch_object()){
+
+		$index = 1;
+		while($row = mysqli_fetch_array($query)){
+			$id_curso = $row["id_curso"];
+			$nombre_curso = $row["nombre_curso"];
+			$fecha_inicio = $row["fecha_inicio"];
+			$fecha_fin = $row["fecha_fin"];
+			$organizador = $row["organizador"];
+			$modelo_certificado_curso = $row["modelo_certificado_curso"];
+			$modalidad_curso = $row["modalidad_curso"];
+			$apenom = $row["apenom"];
+			$dni = $row["dni"];
+			$firma1_curso = $row["firma1_curso"];
+			$firma2_curso = $row["firma2_curso"];
 
 			$sql2 ="INSERT INTO certificados_x_url ( id_curso, nombre_curso, fecha_inicio_curso, fecha_fin_curso, organizador_curso, modelo_certificado, modalidad_curso, tpo_certificado, apellidos_nombres, id_alumno, firma_presidente, firma_organizador, n_certificado, codigo_certificado, qr_certificado, f_created)
-				VALUES ( '$reg->id_curso', '$reg->nombre_curso', '$reg->fecha_inicio', '$reg->fecha_fin', '$reg->organizador', '$reg->modelo_certificado_curso','$reg->modalidad_curso', '$tpo_certificado', '$reg->apenom', '$reg->dni', '$reg->firma1_curso', '$reg->firma2_curso', '$n_cert',  '$codigo_certificado', '$codigo_certificado', NOW())";
-			return ejecutarConsulta($sql2);
-			//echo $sql2;
+				VALUES ( '$id_curso', '$nombre_curso', '$fecha_inicio', '$fecha_fin', '$organizador', '$modelo_certificado_curso','$modalidad_curso', '$tpo_certificado', '$apenom', '$dni', '$firma1_curso', '$firma2_curso', '$n_cert',  '$codigo_certificado', '$codigo_certificado', NOW())";
+			
+			$index++;
+			$n_cert++;
+			$codigo_certificado = $n_cert.'-'.$mes.'-2021-CV-CSJHCO-PJ';
 
-		}
+			$resultante =  ejecutarConsulta($sql2);
+			
+			 
+		 }
+
+		 return $resultante;
 	}
 
 	public function datos_p_certificado_url( $id_curso, $id_alumno ){
