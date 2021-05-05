@@ -56,11 +56,11 @@ Class Certificado
 
 	public function listarCertificadosAlumno($txtdniOcelular)
 	{
-		$sql=" SELECT cursos.id_curso, cursos.nombre_curso, alumnos.id_alumno, alumnos.dni, alumnos.celular,  pdf_certificado
+		$sql="SELECT cursos.id_curso, cursos.nombre_curso, alumnos_anteriores.id_alumno_ant, alumnos_anteriores.dni_ant, alumnos_anteriores.celular_ant,  pdf_certificado
 				FROM certificados
 				INNER JOIN cursos ON certificados.id_curso = cursos.id_curso
-				INNER JOIN alumnos ON certificados.id_alumno = alumnos.id_alumno
-				WHERE (alumnos.dni =  '$txtdniOcelular' || alumnos.celular = '$txtdniOcelular' ) ";
+				INNER JOIN alumnos_anteriores ON certificados.id_alumno = alumnos_anteriores.id_alumno_ant
+				WHERE alumnos_anteriores.dni_ant =  '$txtdniOcelular' ";
 		return ejecutarConsulta($sql);		
 	}
 

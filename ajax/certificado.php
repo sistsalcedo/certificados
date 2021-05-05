@@ -69,7 +69,7 @@ switch ($_GET["op"]){
  		while ($reg=$rspta->fetch_object()){
  			$data[]=array(
  				
- 				"0"=>'<small>'.$reg->nombre_curso.'</small>',
+ 				"0"=>'<small>'.utf8_encode($reg->nombre_curso).'</small>',
  				"1"=>'<p align="center"><a  href="../../../certificados/vistas/certificados/certificado_x_url.php?txt_dni='.$reg->id_alumno.'&id_curso='.$reg->id_curso.'" download ><i class="fa fa-download"></i></a></p>',
  
  				);
@@ -136,7 +136,7 @@ switch ($_GET["op"]){
  			$data[]=array(
  				
  				"0"=>'<small>'.$reg->nombre_curso.'</small>',
- 				"1"=>'<p align="center"><a  href="../../../certificados/files/certificados/'.$reg->pdf_certificado.'" download ><i class="fa fa-download"></i></a></p>',
+ 				"1"=>'<p align="center"><a  href="../../../files/certificados/'.$reg->pdf_certificado.'" download ><i class="fa fa-download"></i></a></p>',
  
  				);
  		}
