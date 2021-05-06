@@ -57,7 +57,8 @@ while ($reg=$rspta->fetch_object()){
     $pdf->SetTextColor(85, 85, 87); 
     
     //$pdf->Cell(280,46,ucwords(strval($apellidos)),0,0,'C');
-    $pdf->Cell(280,46,ucwords(strtolower(strval($reg->apellidos_nombres))),0,0,'C');
+    //$apenom = utf8_decode($reg->apellidos_nombres);
+    $pdf->Cell(280,46,ucwords(strtolower(strval(utf8_decode($reg->apellidos_nombres)))),0,0,'C');
     
 
     $pdf->Line(65,102,270,102);

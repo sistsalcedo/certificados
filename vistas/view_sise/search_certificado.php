@@ -82,7 +82,7 @@ require "header.php";
                                      <br>
                                      <div >
                                         <blockquote class=" generic-blockquote">
-                                            <strong><i class="fa fa-exclamation-triangle"> </i> Si tuviera algun inconveniente con los datos en el certificado, comunicarse al telefono fijo (062) 591030 anexo 45005 / 45033</strong>
+                                            <strong><i class="fa fa-exclamation-triangle"> </i> Si tuviera algun inconveniente con los datos en el certificado, comunicarse al WhatsApp  935197244 , Enviandonos sus datos.</strong>
                                         </blockquote>
                                     </div>                            
                                 </div>
